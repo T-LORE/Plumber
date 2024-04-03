@@ -1,5 +1,8 @@
 package classes;
 
+import classes.entities.water_tanks.Drain;
+import classes.entities.water_tanks.Source;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -49,7 +52,29 @@ public class Field {
     }
 
     public Cell getCell(Point coords) {
-        return _cells.get(coords.x).get(coords.y);
+        return _cells.get(coords.y).get(coords.x);
+    }
+
+    public Source getSource() {
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
+                if (_cells.get(i).get(j).getEntity() instanceof Source) {
+                    return (Source) _cells.get(i).get(j).getEntity();
+                }
+            }
+        }
+        return null;
+    }
+
+    public Drain getDrain() {
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
+                if (_cells.get(i).get(j).getEntity() instanceof Drain) {
+                    return (Drain) _cells.get(i).get(j).getEntity();
+                }
+            }
+        }
+        return null;
     }
 
     public String toString() {
@@ -60,7 +85,6 @@ public class Field {
             }
             result += "\n";
         }
-        result += "\n";
 
         return result;
     }

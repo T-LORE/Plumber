@@ -43,16 +43,16 @@ public class Cell {
         Point neighborCoords = new Point(_cords);
         switch (direction) {
             case UP:
-                neighborCoords.translate(-1, 0);
-                break;
-            case DOWN:
-                neighborCoords.translate(1, 0);
-                break;
-            case LEFT:
                 neighborCoords.translate(0, -1);
                 break;
-            case RIGHT:
+            case DOWN:
                 neighborCoords.translate(0, 1);
+                break;
+            case LEFT:
+                neighborCoords.translate(-1, 0);
+                break;
+            case RIGHT:
+                neighborCoords.translate(1, 0);
                 break;
         }
         if (neighborCoords.x < 0 || neighborCoords.x >= _field.getHeight() || neighborCoords.y < 0 || neighborCoords.y >= _field.getWidth()) {

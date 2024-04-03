@@ -8,9 +8,10 @@ public class Source extends WaterTank {
         super();
     }
     
-    public void createWater(){
-        Water water = new Water();
+    public Water createWater(){
+        Water water = new Water(this);
         fill(water);
+        return water;
     }
 
     @Override

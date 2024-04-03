@@ -1,5 +1,6 @@
 package classes.entities.water_tanks;
 
+import classes.Cell;
 import classes.Direction;
 import classes.Water;
 import classes.entities.Entity;
@@ -66,9 +67,17 @@ public class WaterTank extends Entity {
     public HashMap<Direction, WaterTank> getReachableWaterTanks() {
         HashMap<Direction, WaterTank> result = new HashMap<Direction, WaterTank>();
         for (Direction direction : _possibleDirections) {
-            WaterTank waterTank = (WaterTank) getCell().getNeighbor(direction).getEntity();
-            if (waterTank != null) {
-                result.put(direction, waterTank);
+            Cell cell = getCell().getNeighbor(direction);
+            if (cell == null)
+            {
+                continue;
+            }
+            Entity entity = cell.getEntity();
+            if (entity instanceof WaterTank waterTank) {
+                if (waterTank.reachableFrom(direction.turnAround()))
+                {
+                    result.put(direction.turnAround(), waterTank);
+                }
             }
         }
         return result;
@@ -80,44 +89,44 @@ public class WaterTank extends Entity {
         if (_dict == null)
         {
             _dict = new HashMap<String, String>();
-            _dict.put("00000", "\u25CB");
-            _dict.put("00010", "\u2578");
-            _dict.put("00100", "\u2578");
-            _dict.put("00110", "\u2500");
-            _dict.put("01000", "\u2575");
-            _dict.put("01010", "\u2554");
-            _dict.put("01100", "\u2557");
-            _dict.put("01110", "\u2566");
-            _dict.put("10000", "\u2575");
-            _dict.put("10010", "\u255A");
-            _dict.put("10100", "\u255D");
-            _dict.put("10110", "\u2569");
-            _dict.put("11000", "\u2551");
-            _dict.put("11010", "\u2560");
-            _dict.put("11100", "\u2563");
-            _dict.put("11110", "\u256C");
+            _dict.put("00000", "○");
+            _dict.put("00010", "╸");
+            _dict.put("00100", "╸");
+            _dict.put("00110", "─");
+            _dict.put("01000", "╵");
+            _dict.put("01010", "╔");
+            _dict.put("01100", "╗");
+            _dict.put("01110", "╦");
+            _dict.put("10000", "╵");
+            _dict.put("10010", "╚");
+            _dict.put("10100", "╝");
+            _dict.put("10110", "╩");
+            _dict.put("11000", "║");
+            _dict.put("11010", "╠");
+            _dict.put("11100", "╣");
+            _dict.put("11110", "╬");
 
-            _dict.put("00001", "\u25CF");
-            _dict.put("00011", "\u2578");
-            _dict.put("00101", "\u257A");
-            _dict.put("00111", "\u2501");
-            _dict.put("01001", "\u257B");
-            _dict.put("01011", "\u255F");
-            _dict.put("01101", "\u2563");
-            _dict.put("01111", "\u256B");
-            _dict.put("10001", "\u257B");
-            _dict.put("10011", "\u255F");
-            _dict.put("10101", "\u2563");
-            _dict.put("10111", "\u256B");
-            _dict.put("11001", "\u257A");
-            _dict.put("11011", "\u255F");
-            _dict.put("11101", "\u2563");
-            _dict.put("11111", "\u256B");
+            _dict.put("00001", "●");
+            _dict.put("00011", "╸");
+            _dict.put("00101", "╺");
+            _dict.put("00111", "━");
+            _dict.put("01001", "╻");
+            _dict.put("01011", "┏");
+            _dict.put("01101", "┓");
+            _dict.put("01111", "┳");
+            _dict.put("10001", "╹");
+            _dict.put("10011", "┛");
+            _dict.put("10101", "┗");
+            _dict.put("10111", "┻");
+            _dict.put("11001", "┃");
+            _dict.put("11011", "┣");
+            _dict.put("11101", "┫");
+            _dict.put("11111", "╋");
         }
          
         String key = "";
         key += _possibleDirections.contains(Direction.UP) ? "1" : "0";
-        key += _possibleDirections.contains(Direction.RIGHT) ? "1" : "0";
+        key += _possibleDirections.contains(Direction.DOWN) ? "1" : "0";
         key += _possibleDirections.contains(Direction.LEFT) ? "1" : "0";
         key += _possibleDirections.contains(Direction.RIGHT) ? "1" : "0";
         key += _water == null ? "0" : "1";

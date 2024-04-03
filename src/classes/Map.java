@@ -57,6 +57,10 @@ public class Map {
             ArrayList<WaterTank> watertanks = new ArrayList<WaterTank>();
             for (int i = 0; i < 16; i++)
             {
+                if (i == 12)
+                {
+                    int a = 2;
+                }
                 WaterTank watertank = new WaterTank();
                 ArrayList<Direction> possibleDirections = new ArrayList<Direction>();
                 if ((i & 1) == 1)
@@ -103,21 +107,32 @@ public class Map {
                     field.setCell(newCell);
                 } else if (cell.equals(source.toString())) {
                     Source newSource = new Source();
+                    newSource.addPossibleDirection(Direction.UP);
+                    newSource.addPossibleDirection(Direction.DOWN);
+                    newSource.addPossibleDirection(Direction.LEFT);
+                    newSource.addPossibleDirection(Direction.RIGHT);
+                    newSource.setCell(newCell);
                     newCell.setEntity(newSource);
                     field.setCell(newCell);
                 } else if (cell.equals(drain.toString())) {
                     Drain newDrain = new Drain();
+                    newDrain.addPossibleDirection(Direction.UP);
+                    newDrain.addPossibleDirection(Direction.DOWN);
+                    newDrain.addPossibleDirection(Direction.LEFT);
+                    newDrain.addPossibleDirection(Direction.RIGHT);
+                    newDrain.setCell(newCell);
                     newCell.setEntity(newDrain);
                     field.setCell(newCell);
                 } else  if (_parseDict.containsKey(cell)){
                     ArrayList<Direction> possibleDirections = _parseDict.get(cell);
                     WaterTank watertank = new WaterTank();
                     watertank.addPossibleDirections(possibleDirections);
+                    watertank.setCell(newCell);
                     newCell.setEntity(watertank);
                     field.setCell(newCell);
                 } else {
                     //log in console
-                    System.out.println("Invalid cell type: " + cell + "at position " + i + " " + j);
+                    System.out.println("Invalid cell type: <" + cell + "> at position " + i + " " + j);
                 }   
             }
         }
