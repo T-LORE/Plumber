@@ -4,41 +4,59 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Field {
-    private int height;
-    private int width;
+    private int _height;
+    private int _width;
 
-    private ArrayList<ArrayList<Cell>> cells = new ArrayList<ArrayList<Cell>>();
+    private ArrayList<ArrayList<Cell>> _cells = new ArrayList<ArrayList<Cell>>();
 
-    public Field(int height, int width) {
-        this.height = height;
-        this.width = width;
+    public Field(int _height, int _width) {
+        this._height = _height;
+        this._width = _width;
 
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < _height; i++) {
             ArrayList<Cell> row = new ArrayList<Cell>();
-            for (int j = 0; j < width; j++) {
+            for (int j = 0; j < _width; j++) {
                 row.add(new Cell(new Point(i, j), this));
             }
-            cells.add(row);
+            _cells.add(row);
         }
     }
+    
+    public void setCell(Cell cell)
+    {
+        Point cords = cell.getCoords();
+        if (cords.x > _width)
+        {
+            throw new IllegalArgumentException("x is out of bounds " + cords.x);
+        }
 
+        if (cords.y > _height)
+        {
+            throw new IllegalArgumentException("y is out of bounds " + cords.y);
+        }
+
+        ArrayList<Cell> a = _cells.get(cords.y);
+        a.add(cords.x, cell);
+        
+    }
+    
     public int getHeight() {
-        return height;
+        return _height;
     }
 
     public int getWidth() {
-        return width;
+        return _width;
     }
 
     public Cell getCell(Point coords) {
-        return cells.get(coords.x).get(coords.y);
+        return _cells.get(coords.x).get(coords.y);
     }
 
     public String toString() {
         String result = "";
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                result += cells.get(i).get(j).toString();
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
+                result += _cells.get(i).get(j).toString();
             }
             result += "\n";
         }

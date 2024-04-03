@@ -5,13 +5,16 @@ import classes.entities.Entity;
 import java.awt.*;
 
 public class Cell {
-    Point _coords;
+    Point _cords;
     Entity _entity;
     Field _field;
 
-    public Cell(Point coords, Field field) {
-        _coords = coords;
+    public Cell() {
+    }
+
+    public Cell(Point cords, Field field) {
         _field = field;
+        _cords = cords;
     }
 
     public void setEntity(Entity entity) {
@@ -23,15 +26,21 @@ public class Cell {
     }
 
     public Point getCoords() {
-        return _coords;
+        return _cords;
     }
 
     public Field getField() {
         return _field;
     }
 
+    public void SetField(Field field, Point cords) {
+        _field = field;
+        _cords = cords;
+    }
+
+
     public Cell getNeighbor(Direction direction) {
-        Point neighborCoords = new Point(_coords);
+        Point neighborCoords = new Point(_cords);
         switch (direction) {
             case UP:
                 neighborCoords.translate(-1, 0);

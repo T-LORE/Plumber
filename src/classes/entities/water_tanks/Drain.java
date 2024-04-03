@@ -15,4 +15,9 @@ public class Drain extends WaterTank {
 
     }
 
+    @Override
+    public String toString(){
+        return "d";
+    }
+
 }

@@ -12,4 +12,9 @@ public class Source extends WaterTank {
         Water water = new Water();
         fill(water);
     }
+
+    @Override
+    public String toString(){
+        return "s";
+    }
 }
