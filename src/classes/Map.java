@@ -1,6 +1,7 @@
 package classes;
 
 import classes.entities.water_tanks.Drain;
+import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.Source;
 import classes.entities.water_tanks.WaterTank;
 
@@ -125,7 +126,7 @@ public class Map {
                     field.setCell(newCell);
                 } else  if (_parseDict.containsKey(cell)){
                     ArrayList<Direction> possibleDirections = _parseDict.get(cell);
-                    WaterTank watertank = new WaterTank();
+                    Pipe watertank = new Pipe();
                     watertank.addPossibleDirections(possibleDirections);
                     watertank.setCell(newCell);
                     newCell.setEntity(watertank);
