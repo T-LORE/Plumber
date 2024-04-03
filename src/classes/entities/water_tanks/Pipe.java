@@ -4,6 +4,11 @@ import classes.Direction;
 import java.util.ArrayList;
 
 public class Pipe extends WaterTank {
+    
+    public Pipe() {
+        super();
+    }
+    
     public void rotateClockwise() {  
         ArrayList<Direction> newDirections = new ArrayList<Direction>();
         for (Direction direction : getPossibleDirections()) {
