@@ -72,34 +72,34 @@ public class DirectionTests {
     }
 
     @Test
-    void rotateAntiClockwiseUP() {
+    void rotateCounterClockwiseUP() {
         Direction dir = Direction.UP;
         Direction expectedDir = Direction.LEFT;
-        Direction actualDir = dir.rotateAntiClockwise();
+        Direction actualDir = dir.rotateCounterClockwise();
         assertEquals(expectedDir, actualDir);
     }
 
     @Test
-    void rotateAntiClockwiseLEFT() {
+    void rotateCounterClockwiseLEFT() {
         Direction dir = Direction.LEFT;
         Direction expectedDir = Direction.DOWN;
-        Direction actualDir = dir.rotateAntiClockwise();
+        Direction actualDir = dir.rotateCounterClockwise();
         assertEquals(expectedDir, actualDir);
     }
 
     @Test
-    void rotateAntiClockwiseDOWN() {
+    void rotateCounterClockwiseDOWN() {
         Direction dir = Direction.DOWN;
         Direction expectedDir = Direction.RIGHT;
-        Direction actualDir = dir.rotateAntiClockwise();
+        Direction actualDir = dir.rotateCounterClockwise();
         assertEquals(expectedDir, actualDir);
     }
 
     @Test
-    void rotateAntiClockwiseRIGHT() {
+    void rotateCounterClockwiseRIGHT() {
         Direction dir = Direction.RIGHT;
         Direction expectedDir = Direction.UP;
-        Direction actualDir = dir.rotateAntiClockwise();
+        Direction actualDir = dir.rotateCounterClockwise();
         assertEquals(expectedDir, actualDir);
     }
 

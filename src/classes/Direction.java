@@ -12,7 +12,7 @@ public enum Direction{
         return Direction.values()[nextIndex];
     }
 
-    public Direction rotateAntiClockwise() {
+    public Direction rotateCounterClockwise() {
         int nextIndex = this.ordinal() - 1;
         if (nextIndex < 0)
         {
