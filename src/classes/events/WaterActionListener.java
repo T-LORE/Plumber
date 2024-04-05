@@ -6,4 +6,6 @@ public interface WaterActionListener extends EventListener {
     void waterEndFlow(WaterActionEvent event);
 
     void waterPouredOut(WaterActionEvent event);
+
+    void tickEnd(WaterActionEvent event);
 }

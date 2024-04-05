@@ -13,6 +13,16 @@ public class Water {
     private ArrayList<HashMap<WaterTank,Direction>> _pastTicks;
 
     private ArrayList<WaterActionListener> _listeners = new ArrayList<>();
+
+    private TimerTask _task = new TimerTask() {
+        public void run() {
+            nextTick();
+        }
+    };
+
+    private Timer _timer = new Timer("Timer");
+    private final int DELAY = 1000;
+
     public Water(WaterTank source) {
         _pastTicks = new ArrayList<HashMap<WaterTank,Direction>>();
         _pastTicks.add(new HashMap<WaterTank,Direction>());
@@ -20,27 +30,18 @@ public class Water {
     }
     //flow by timer
     public void flow() {
-        TimerTask task = new TimerTask() {
-            public void run() {
-                nextTick();
-                flow();
-            }
-        };
-        Timer timer = new Timer("Timer");
+        _timer.scheduleAtFixedRate(_task, DELAY, DELAY);
+    }
 
-        long delay = 1000L;
-        timer.schedule(task, delay);
+    public void stop() {
+        _timer.cancel();
     }
 
     public void nextTick()
     {
-        //get last tick
         HashMap<WaterTank,Direction> lastTick = _pastTicks.get(_pastTicks.size()-1);
-        //create new tick
         HashMap<WaterTank,Direction> newTick = new HashMap<WaterTank,Direction>();
-        //iterate over last tick
         for (WaterTank waterTank : lastTick.keySet()) {
-            //get reachable neighbours
             HashMap<Direction, WaterTank> neighbours = waterTank.getReachableWaterTanks();
             for (Direction direction : neighbours.keySet()) {
                 boolean isFilled = neighbours.get(direction).fillFromDirection(direction, Water.this);
@@ -49,15 +50,25 @@ public class Water {
                 }
             }
         }
+
         if (newTick.isEmpty()) {
+            stop();
             fireEndFlowEvent();
         } else {
             _pastTicks.add(newTick);
         }
+
+        fireEndTickEvent();
     }
 
     public void addListener (WaterActionListener listener) {
         _listeners.add(listener);
+    }
+
+    private void fireEndTickEvent() {
+        for (WaterActionListener listener : _listeners) {
+            listener.tickEnd(new WaterActionEvent(this));
+        }
     }
 
     private void fireEndFlowEvent() {
