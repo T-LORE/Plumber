@@ -1,6 +1,8 @@
 package classes;
 
 import classes.entities.water_tanks.WaterTank;
+import classes.events.WaterActionEvent;
+import classes.events.WaterActionListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +11,8 @@ import java.util.TimerTask;
 
 public class Water {
     private ArrayList<HashMap<WaterTank,Direction>> _pastTicks;
+
+    private ArrayList<WaterActionListener> _listeners = new ArrayList<>();
     public Water(WaterTank source) {
         _pastTicks = new ArrayList<HashMap<WaterTank,Direction>>();
         _pastTicks.add(new HashMap<WaterTank,Direction>());
@@ -45,8 +49,26 @@ public class Water {
                 }
             }
         }
+        if (newTick.isEmpty()) {
+            fireEndFlowEvent();
+        } else {
+            _pastTicks.add(newTick);
+        }
+    }
 
-        //add new tick
-        _pastTicks.add(newTick);
+    public void addListener (WaterActionListener listener) {
+        _listeners.add(listener);
+    }
+
+    private void fireEndFlowEvent() {
+        for (WaterActionListener listener : _listeners) {
+            listener.waterEndFlow(new WaterActionEvent(this));
+        }
+    }
+
+    private void firePouredOutEvent() {
+        for (WaterActionListener listener : _listeners) {
+            listener.waterEndFlow(new WaterActionEvent(this));
+        }
     }
 }
