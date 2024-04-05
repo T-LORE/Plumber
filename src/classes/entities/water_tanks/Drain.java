@@ -14,9 +14,12 @@ public class Drain extends WaterTank {
     }
 
     @Override
-    public void fill(Water water){
-        super.fill(water);
-        // TODO: invoke event
+    public boolean fill(Water water){
+        boolean isFilled = super.fill(water);
+        if (isFilled){
+            fireFilledEvent();
+        }
+        return isFilled;
 
     }
 

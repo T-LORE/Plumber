@@ -50,14 +50,18 @@ public class WaterTank extends Entity {
 
     public boolean fillFromDirection(Direction direction, Water water) {
         if (_possibleDirections.contains(direction)) {
-            fill(water);
-            return true;
+            return fill(water);
         }
         return false;
     }
 
-    protected void fill(Water water){
-        _water = water;
+    protected boolean fill(Water water){
+        if (_water == null)
+        {
+            _water = water;
+            return true;
+        }
+        return false;
     }
 
     public boolean reachableFrom(Direction direction) {
