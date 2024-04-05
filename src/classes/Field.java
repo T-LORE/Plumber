@@ -1,5 +1,6 @@
 package classes;
 
+import classes.entities.Entity;
 import classes.entities.water_tanks.Drain;
 import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.Source;
@@ -79,6 +80,15 @@ public class Field {
             }
         }
         return null;
+    }
+
+    public Pipe getPipeOnCords(Point cords) {
+        Entity entity = getCell(cords).getEntity();
+        if (entity instanceof Pipe) {
+            return (Pipe) entity;
+        } else {
+            return null;
+        }
     }
 
     private static HashMap<String, ArrayList<Direction>> _parseDict;
