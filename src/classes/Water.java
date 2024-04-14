@@ -10,7 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Water {
-    private ArrayList<HashMap<WaterTank,Direction>> _pastTicks;
+    private ArrayList<HashMap<WaterTank,Direction>> _pastTicks = new ArrayList<>();
 
     private ArrayList<WaterActionListener> _listeners = new ArrayList<>();
 
@@ -24,11 +24,11 @@ public class Water {
     private final int DELAY = 1000;
 
     public Water(WaterTank source) {
-        _pastTicks = new ArrayList<HashMap<WaterTank,Direction>>();
-        _pastTicks.add(new HashMap<WaterTank,Direction>());
-        _pastTicks.get(0).put(source, null);
+        HashMap<WaterTank,Direction> zeroStep = new HashMap<>();
+        zeroStep.put(source, null);
+        _pastTicks.add(zeroStep);
     }
-    //flow by timer
+
     public void flow() {
         _timer.scheduleAtFixedRate(_task, DELAY, DELAY);
     }
