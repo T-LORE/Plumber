@@ -1,6 +1,5 @@
 package classes;
 
-import classes.entities.water_tanks.Pipe;
 import classes.events.PlayerActionEvent;
 import classes.events.PlayerActionListener;
 import classes.events.UserInputEvent;
