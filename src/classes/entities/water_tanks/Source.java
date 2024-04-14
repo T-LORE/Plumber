@@ -9,6 +9,9 @@ public class Source extends WaterTank {
     }
     
     public Water createWater(){
+        if (getWater() != null){
+            throw new IllegalStateException("Water already exists");
+        }
         Water water = new Water(this);
         fill(water);
         return water;

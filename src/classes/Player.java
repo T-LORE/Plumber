@@ -19,7 +19,7 @@ public class Player {
         userInputEventSender.addListener(userInputObserver);
     }
 
-    public void setActive(boolean isActive) {
+    private void setActive(boolean isActive) {
         _isActive = isActive;
     }
 

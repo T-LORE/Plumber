@@ -5,9 +5,9 @@ import classes.entities.Entity;
 import java.awt.*;
 
 public class Cell {
-    Point _cords;
-    Entity _entity;
-    Field _field;
+    private Point _cords;
+    private Entity _entity;
+    private Field _field;
 
     public Cell() {
     }
@@ -16,9 +16,22 @@ public class Cell {
         _field = field;
         _cords = cords;
     }
+    
+    public void setField(Field field, Point cords) {
+        _cords = cords;
+        _field = field;
+        _field.setCell(this);
+    }
+
+    public Field getField() {
+        return _field;
+    }
 
     public void setEntity(Entity entity) {
         _entity = entity;
+        if (_entity.getCell() == null) {
+            _entity.setCell(this);
+        }
     }
 
     public Entity getEntity() {
@@ -29,17 +42,10 @@ public class Cell {
         return _cords;
     }
 
-    public Field getField() {
-        return _field;
-    }
-
-    public void SetField(Field field, Point cords) {
-        _field = field;
-        _cords = cords;
-    }
-
 
     public Cell getNeighbor(Direction direction) {
+        if (_field == null)
+            return null;
         Point neighborCoords = new Point(_cords);
         switch (direction) {
             case UP:
@@ -59,6 +65,10 @@ public class Cell {
             return null;
         }
         return _field.getCell(neighborCoords);
+    }
+
+    public void setCords(Point cords) {
+        _cords = cords;
     }
 
     @Override

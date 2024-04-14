@@ -6,7 +6,6 @@ import classes.Water;
 import classes.entities.Entity;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class WaterTank extends Entity {
@@ -68,7 +67,7 @@ public class WaterTank extends Entity {
         return _possibleDirections.contains(direction);
     }
 
-    public HashMap<Direction, WaterTank> getReachableWaterTanks() {
+    public HashMap<Direction, WaterTank> getConnectedWaterTanks() {
         HashMap<Direction, WaterTank> result = new HashMap<Direction, WaterTank>();
         for (Direction direction : _possibleDirections) {
             Cell cell = getCell().getNeighbor(direction);
@@ -80,11 +79,16 @@ public class WaterTank extends Entity {
             if (entity instanceof WaterTank waterTank) {
                 if (waterTank.reachableFrom(direction.turnAround()))
                 {
-                    result.put(direction.turnAround(), waterTank);
+                    result.put(direction, waterTank);
                 }
             }
         }
         return result;
+    }
+
+    public Water getWater() {
+
+        return _water;
     }
 
     private HashMap<String, String> _dict = null;
@@ -96,7 +100,7 @@ public class WaterTank extends Entity {
             _dict.put("00000", "○");
             _dict.put("00010", "╸");
             _dict.put("00100", "╸");
-            _dict.put("00110", "─");
+            _dict.put("00110", "═");
             _dict.put("01000", "╵");
             _dict.put("01010", "╔");
             _dict.put("01100", "╗");
@@ -119,8 +123,8 @@ public class WaterTank extends Entity {
             _dict.put("01101", "┓");
             _dict.put("01111", "┳");
             _dict.put("10001", "╹");
-            _dict.put("10011", "┛");
-            _dict.put("10101", "┗");
+            _dict.put("10011", "┗");
+            _dict.put("10101", "┛");
             _dict.put("10111", "┻");
             _dict.put("11001", "┃");
             _dict.put("11011", "┣");

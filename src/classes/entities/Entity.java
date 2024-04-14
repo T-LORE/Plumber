@@ -7,9 +7,13 @@ public abstract class Entity {
 
     public void setCell(Cell cell) {
         _cell = cell;
+        if (cell.getEntity() == null) {
+            cell.setEntity(this);
+        }
     }
 
-    protected Cell getCell() {
+    public Cell getCell() {
+
         return _cell;
     }
 }

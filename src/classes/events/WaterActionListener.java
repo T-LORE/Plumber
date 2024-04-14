@@ -5,5 +5,5 @@ import java.util.EventListener;
 public interface WaterActionListener extends EventListener {
     void waterEndFlow(WaterActionEvent event);
 
-    void tickEnd(WaterActionEvent event);
+    void stepEnd(WaterActionEvent event);
 }

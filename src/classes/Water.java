@@ -10,23 +10,31 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Water {
-    private ArrayList<HashMap<WaterTank,Direction>> _pastTicks = new ArrayList<>();
+    private ArrayList<HashMap<WaterTank,Direction>> _pastSteps = new ArrayList<>();
 
     private ArrayList<WaterActionListener> _listeners = new ArrayList<>();
 
     private final TimerTask _task = new TimerTask() {
         public void run() {
-            nextTick();
+            nextStep();
         }
     };
 
     private final Timer _timer = new Timer("Flow timer");
-    private final int DELAY = 1000;
+    private int DELAY = 10;
+
+    public ArrayList<HashMap<WaterTank,Direction>> getAllSteps() {
+        return _pastSteps;
+    }
+
+    public void setWaterDelay(int delay) {
+        DELAY = delay;
+    }
 
     public Water(WaterTank source) {
         HashMap<WaterTank,Direction> zeroStep = new HashMap<>();
         zeroStep.put(source, null);
-        _pastTicks.add(zeroStep);
+        _pastSteps.add(zeroStep);
     }
 
     public void flow() {
@@ -37,37 +45,40 @@ public class Water {
         _timer.cancel();
     }
 
-    public void nextTick()
-    {
-        HashMap<WaterTank,Direction> lastTick = _pastTicks.get(_pastTicks.size()-1);
-        HashMap<WaterTank,Direction> newTick = new HashMap<>();
-        for (WaterTank waterTank : lastTick.keySet()) {
-            HashMap<Direction, WaterTank> neighbours = waterTank.getReachableWaterTanks();
+    public void nextStep()
+    {     
+        HashMap<WaterTank,Direction> newStep = new HashMap<>();
+        for (WaterTank waterTank : lastStep().keySet()) {
+            HashMap<Direction, WaterTank> neighbours = waterTank.getConnectedWaterTanks();
             for (Direction direction : neighbours.keySet()) {
-                boolean isFilled = neighbours.get(direction).fillFromDirection(direction, Water.this);
+                boolean isFilled = neighbours.get(direction).fillFromDirection(direction.turnAround(), Water.this);
                 if (isFilled) {
-                    newTick.put(neighbours.get(direction), direction);
+                    newStep.put(neighbours.get(direction), direction.turnAround());
                 }
             }
         }
 
-        if (newTick.isEmpty()) {
+        if (newStep.isEmpty()) {
             stop();
             fireEndFlowEvent();
         } else {
-            _pastTicks.add(newTick);
+            _pastSteps.add(newStep);
         }
 
-        fireEndTickEvent();
+        fireEndStepEvent();
+    }
+
+    private HashMap<WaterTank,Direction> lastStep() {
+        return _pastSteps.get(_pastSteps.size()-1);
     }
 
     public void addListener (WaterActionListener listener) {
         _listeners.add(listener);
     }
 
-    private void fireEndTickEvent() {
+    private void fireEndStepEvent() {
         for (WaterActionListener listener : _listeners) {
-            listener.tickEnd(new WaterActionEvent(this));
+            listener.stepEnd(new WaterActionEvent(this));
         }
     }
 
@@ -77,9 +88,4 @@ public class Water {
         }
     }
 
-    private void firePouredOutEvent() {
-        for (WaterActionListener listener : _listeners) {
-            listener.waterEndFlow(new WaterActionEvent(this));
-        }
-    }
 }

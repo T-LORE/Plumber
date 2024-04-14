@@ -114,7 +114,7 @@ public class Game {
         }
 
         @Override
-        public void tickEnd(WaterActionEvent event) {
+        public void stepEnd(WaterActionEvent event) {
             fireWaterTickEvent();
         }
     }

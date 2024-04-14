@@ -1,4 +1,5 @@
 import classes.*;
+import classes.entities.Entity;
 import classes.events.*;
 
 import java.io.IOException;
@@ -9,7 +10,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ConsoleUserInput eventSimulator = new ConsoleUserInput();
         UserInputObserver observer = new UserInputObserver();
-
         _game = new Game(eventSimulator);
         eventSimulator.addListener(observer);
         _game.addListener(new GameObserver());
@@ -50,7 +50,7 @@ public class Main {
         }
 
         @Override
-        public void tickEnd(WaterActionEvent event) {
+        public void stepEnd(WaterActionEvent event) {
             updateField();
         }
     }
