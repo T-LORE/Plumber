@@ -14,13 +14,13 @@ public class Water {
 
     private ArrayList<WaterActionListener> _listeners = new ArrayList<>();
 
-    private TimerTask _task = new TimerTask() {
+    private final TimerTask _task = new TimerTask() {
         public void run() {
             nextTick();
         }
     };
 
-    private Timer _timer = new Timer("Timer");
+    private final Timer _timer = new Timer("Flow timer");
     private final int DELAY = 1000;
 
     public Water(WaterTank source) {
@@ -40,7 +40,7 @@ public class Water {
     public void nextTick()
     {
         HashMap<WaterTank,Direction> lastTick = _pastTicks.get(_pastTicks.size()-1);
-        HashMap<WaterTank,Direction> newTick = new HashMap<WaterTank,Direction>();
+        HashMap<WaterTank,Direction> newTick = new HashMap<>();
         for (WaterTank waterTank : lastTick.keySet()) {
             HashMap<Direction, WaterTank> neighbours = waterTank.getReachableWaterTanks();
             for (Direction direction : neighbours.keySet()) {
