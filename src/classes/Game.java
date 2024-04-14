@@ -24,7 +24,7 @@ public class Game {
 
     private ArrayList<GameActionListener> _listeners = new ArrayList<>();
 
-    public Game(ConsoleUserInput eventSimulator) {
+    public Game(UserInputHandler eventSimulator) {
         UserInputObserver userInputObserver = new UserInputObserver();
         eventSimulator.addListener(userInputObserver);
         _player = new Player(eventSimulator);
@@ -36,14 +36,13 @@ public class Game {
         _gameStatus = gameStatus;
     }
 
-    public GameStatus getGameStatus() {
-        return _gameStatus;
-    }
-
     private void prepareLevel(String levelPath) throws IOException {
+        if (_water != null)
+        {
+            _water.stop();
+        }
         _field = Field.loadFromFile(levelPath);
         _field.getDrain().addListener(new DrainObserver());
-        _player.setActive(true);
         setGameStatus(GameStatus.CONSTRUCTION_PHASE);
     }
 
@@ -57,25 +56,28 @@ public class Game {
     }
 
     private void startWaterFlow() {
-        if (_gameStatus != GameStatus.CONSTRUCTION_PHASE)
-            return;
-        _water = _field.getSource().createWater();
-        _water.flow();
-        WaterObserver observer = new WaterObserver();
-        _water.addListener(observer);
-        setGameStatus(GameStatus.FLOW_PHASE);
+        if (_gameStatus == GameStatus.CONSTRUCTION_PHASE) {
+            _water = _field.getSource().createWater();
+            _water.flow();
+            _water.addListener(new WaterObserver());
+            setGameStatus(GameStatus.FLOW_PHASE);
+        }
     }
 
     private void onDrainFilled() {
-        fireWinEvent();
-        _water.stop();
-        setGameStatus(GameStatus.END_GAME_PHASE);
+        if (_gameStatus == GameStatus.FLOW_PHASE) {
+            fireWinEvent();
+            _water.stop();
+            setGameStatus(GameStatus.END_GAME_PHASE);
+        }
     }
 
     private void onWaterEndFlow() {
-        fireLoseEvent();
-        _water.stop();
-        setGameStatus(GameStatus.END_GAME_PHASE);
+        if (_gameStatus == GameStatus.FLOW_PHASE) {
+            fireLoseEvent();
+            _water.stop();
+            setGameStatus(GameStatus.END_GAME_PHASE);
+        }
     }
 
     public Field getField() {

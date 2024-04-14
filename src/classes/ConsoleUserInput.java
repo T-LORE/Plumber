@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ConsoleUserInput {
-    private ArrayList<UserInputListener> _listeners = new ArrayList<>();
+public class ConsoleUserInput extends UserInputHandler {
 
     public ConsoleUserInput() {
 
@@ -49,10 +48,6 @@ public class ConsoleUserInput {
         }
         
         
-    }
-
-    public void addListener(UserInputListener listener) {
-        _listeners.add(listener);
     }
 
     private void fireRotateClockwiseEvent(Point point) {

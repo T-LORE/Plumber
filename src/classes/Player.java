@@ -15,9 +15,9 @@ public class Player {
 
     private ArrayList<PlayerActionListener> _listeners = new ArrayList<>();
 
-    public Player(ConsoleUserInput eventSimulator) {
+    public Player(UserInputHandler userInputEventSender) {
         UserInputObserver userInputObserver = new UserInputObserver();
-        eventSimulator.addListener(userInputObserver);
+        userInputEventSender.addListener(userInputObserver);
     }
 
     public void setActive(boolean isActive) {
@@ -52,10 +52,12 @@ public class Player {
 
         @Override
         public void startFlow(UserInputEvent event) {
+            Player.this.setActive(false);
         }
 
         @Override
         public void loadLevel(UserInputEvent event) throws IOException {
+            Player.this.setActive(true);
         }
     }
 }
