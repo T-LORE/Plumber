@@ -50,11 +50,6 @@ public class Main {
         }
 
         @Override
-        public void waterPouredOut(WaterActionEvent event) {
-
-        }
-
-        @Override
         public void tickEnd(WaterActionEvent event) {
             updateField();
         }

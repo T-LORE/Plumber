@@ -1,7 +1,9 @@
 package classes;
 
+import classes.entities.water_tanks.Pipe;
 import classes.events.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,6 +28,8 @@ public class Game {
         UserInputObserver userInputObserver = new UserInputObserver();
         eventSimulator.addListener(userInputObserver);
         _player = new Player(eventSimulator);
+        _player.addListener(new PlayerObserver());
+        setGameStatus(GameStatus.END_GAME_PHASE);
     }
 
     private void setGameStatus(GameStatus gameStatus) {
@@ -37,12 +41,19 @@ public class Game {
     }
 
     private void prepareLevel(String levelPath) throws IOException {
-        _gameStatus = GameStatus.CONSTRUCTION_PHASE;
-        DrainObserver observer = new DrainObserver();
         _field = Field.loadFromFile(levelPath);
-        _player.setField(_field);
+        _field.getDrain().addListener(new DrainObserver());
         _player.setActive(true);
-        _field.getDrain().addListener(observer);
+        setGameStatus(GameStatus.CONSTRUCTION_PHASE);
+    }
+
+    private void rotateClockwise(Point cords){
+        if (_gameStatus == GameStatus.CONSTRUCTION_PHASE) {
+            Pipe pipe = _field.getPipeOnCords(cords);
+            if (pipe != null) {
+                pipe.rotateClockwise();
+            }
+        }
     }
 
     private void startWaterFlow() {
@@ -52,27 +63,19 @@ public class Game {
         _water.flow();
         WaterObserver observer = new WaterObserver();
         _water.addListener(observer);
-        _gameStatus = GameStatus.FLOW_PHASE;
+        setGameStatus(GameStatus.FLOW_PHASE);
     }
 
     private void onDrainFilled() {
         fireWinEvent();
         _water.stop();
-        _gameStatus = GameStatus.END_GAME_PHASE;
+        setGameStatus(GameStatus.END_GAME_PHASE);
     }
 
     private void onWaterEndFlow() {
         fireLoseEvent();
         _water.stop();
-        _gameStatus = GameStatus.END_GAME_PHASE;
-
-    }
-
-    private void onWaterPouredOut() {
-        System.out.println("lost poured");
-        fireLoseEvent();
-        _water.stop();
-        _gameStatus = GameStatus.END_GAME_PHASE;
+        setGameStatus(GameStatus.END_GAME_PHASE);
     }
 
     public Field getField() {
@@ -101,18 +104,11 @@ public class Game {
         }
     }
 
-
-
     private class WaterObserver implements WaterActionListener {
 
         @Override
         public void waterEndFlow(WaterActionEvent event) {
             onWaterEndFlow();
-        }
-
-        @Override
-        public void waterPouredOut(WaterActionEvent event) {
-            onWaterPouredOut();
         }
 
         @Override
@@ -146,4 +142,14 @@ public class Game {
             prepareLevel(event.levelPath);
         }
     }
+
+    private class PlayerObserver implements PlayerActionListener {
+
+
+        @Override
+        public void rotateClockwise(PlayerActionEvent event) {
+            Game.this.rotateClockwise(event.cords);
+        }
+    }
+
 }

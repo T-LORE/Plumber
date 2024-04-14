@@ -1,24 +1,23 @@
 package classes;
 
 import classes.entities.water_tanks.Pipe;
+import classes.events.PlayerActionEvent;
+import classes.events.PlayerActionListener;
 import classes.events.UserInputEvent;
 import classes.events.UserInputListener;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Player {
     private boolean _isActive;
 
-    private Field _field;
+    private ArrayList<PlayerActionListener> _listeners = new ArrayList<>();
 
     public Player(ConsoleUserInput eventSimulator) {
         UserInputObserver userInputObserver = new UserInputObserver();
         eventSimulator.addListener(userInputObserver);
-    }
-
-    public void setField(Field field) {
-        _field = field;
     }
 
     public void setActive(boolean isActive) {
@@ -29,10 +28,19 @@ public class Player {
         if (!_isActive)
             return;
 
-        Pipe pipe = _field.getPipeOnCords(cords);
-        if (pipe != null) {
-            pipe.rotateClockwise();
+        fireRotateClockwiseEvent(cords);
+    }
+
+    private void fireRotateClockwiseEvent(Point cords) {
+        PlayerActionEvent event = new PlayerActionEvent(this);
+        event.cords = cords;
+        for (PlayerActionListener listener : _listeners) {
+            listener.rotateClockwise(event);
         }
+    }
+
+    public void addListener(PlayerActionListener listener) {
+        _listeners.add(listener);
     }
 
     private class UserInputObserver implements UserInputListener {
