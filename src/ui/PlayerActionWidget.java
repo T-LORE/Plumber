@@ -100,7 +100,7 @@ public class PlayerActionWidget extends JPanel {
         @Override
         public void buttonPressed(TexturedButtonEvent e) {
             System.out.println("Load level");
-            JFileChooser fileChooser = new JFileChooser(".");
+            JFileChooser fileChooser = new JFileChooser("levels");
             int result = fileChooser.showOpenDialog(PlayerActionWidget.this);
             if (result == JFileChooser.APPROVE_OPTION) {
                 startLevel(fileChooser.getSelectedFile().getAbsolutePath());
