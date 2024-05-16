@@ -19,15 +19,35 @@ public class Player {
         userInputEventSender.addListener(userInputObserver);
     }
 
-    private void setActive(boolean isActive) {
+    public Player() {
+
+    }
+
+    public void setActive(boolean isActive) {
         _isActive = isActive;
     }
 
-    private void rotateClockwise(Point cords) {
+    public void rotateClockwise(Point cords) {
         if (!_isActive)
             return;
 
         fireRotateClockwiseEvent(cords);
+    }
+
+    public void startLevel(String levelPath) {
+        fireStartLevelEvent(levelPath);
+    }
+
+    public void startWaterFlow() {
+        fireStartWaterFlowEvent();
+    }
+
+    private void fireStartLevelEvent(String levelPath) {
+        PlayerActionEvent event = new PlayerActionEvent(this);
+        event.levelPath = levelPath;
+        for (PlayerActionListener listener : _listeners) {
+            listener.startLevel(event);
+        }
     }
 
     private void fireRotateClockwiseEvent(Point cords) {
@@ -35,6 +55,13 @@ public class Player {
         event.cords = cords;
         for (PlayerActionListener listener : _listeners) {
             listener.rotateClockwise(event);
+        }
+    }
+
+    private void fireStartWaterFlowEvent() {
+        PlayerActionEvent event = new PlayerActionEvent(this);
+        for (PlayerActionListener listener : _listeners) {
+            listener.startFlow(event);
         }
     }
 

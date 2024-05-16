@@ -4,6 +4,8 @@ import classes.Cell;
 import classes.Direction;
 import classes.Water;
 import classes.entities.Entity;
+import classes.events.WaterTankActionEvent;
+import classes.events.WaterTankActionListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 public class WaterTank extends Entity {
     private ArrayList<Direction> _possibleDirections;
     private Water _water;
+    protected ArrayList<WaterTankActionListener> _listeners = new ArrayList<WaterTankActionListener>();
 
     public WaterTank() {
         _possibleDirections = new ArrayList<Direction>();
@@ -58,6 +61,7 @@ public class WaterTank extends Entity {
         if (_water == null)
         {
             _water = water;
+            fireFilledEvent();
             return true;
         }
         return false;
@@ -89,6 +93,16 @@ public class WaterTank extends Entity {
     public Water getWater() {
 
         return _water;
+    }
+
+    public void addListener(WaterTankActionListener listener) {
+        _listeners.add(listener);
+    }
+
+    private void fireFilledEvent() {
+        for (WaterTankActionListener listener : _listeners) {
+            listener.tankFilled(new WaterTankActionEvent(this));
+        }
     }
 
     private HashMap<String, String> _dict = null;

@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game {
+    public Field getGameField() {
+        return _field;
+    }
+
     public enum GameStatus {
         END_GAME_PHASE,
         CONSTRUCTION_PHASE,
@@ -32,17 +36,24 @@ public class Game {
         setGameStatus(GameStatus.END_GAME_PHASE);
     }
 
+    public Game() {
+        _player = new Player();
+        _player.addListener(new PlayerObserver());
+        setGameStatus(GameStatus.END_GAME_PHASE);
+    }
+
     private void setGameStatus(GameStatus gameStatus) {
         _gameStatus = gameStatus;
     }
 
-    private void prepareLevel(String levelPath) throws IOException {
+    public void prepareLevel(String levelPath) throws IOException {
         if (_water != null)
         {
             _water.stop();
         }
         _field = Field.loadFromFile(levelPath);
         _field.getDrain().addListener(new DrainObserver());
+        _player.setActive(true);
         setGameStatus(GameStatus.CONSTRUCTION_PHASE);
     }
 
@@ -55,7 +66,7 @@ public class Game {
         }
     }
 
-    private void startWaterFlow() {
+    public void startWaterFlow() {
         if (_gameStatus == GameStatus.CONSTRUCTION_PHASE) {
             _water = _field.getSource().createWater();
             _water.flow();
@@ -82,6 +93,10 @@ public class Game {
 
     public Field getField() {
         return _field;
+    }
+
+    public Player getPlayer() {
+        return _player;
     }
 
     public void addListener(GameActionListener listener) {
@@ -151,6 +166,20 @@ public class Game {
         @Override
         public void rotateClockwise(PlayerActionEvent event) {
             Game.this.rotateClockwise(event.cords);
+        }
+
+        @Override
+        public void startFlow(PlayerActionEvent event) {
+            startWaterFlow();
+        }
+
+        @Override
+        public void startLevel(PlayerActionEvent event) {
+            try {
+                prepareLevel(event.levelPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
