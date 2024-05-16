@@ -112,8 +112,8 @@ public class WaterTank extends Entity {
         {
             _dict = new HashMap<String, String>();
             _dict.put("00000", "○");
-            _dict.put("00010", "╸");
-            _dict.put("00100", "╸");
+            _dict.put("00010", "╶");
+            _dict.put("00100", "╴");
             _dict.put("00110", "═");
             _dict.put("01000", "╵");
             _dict.put("01010", "╔");
