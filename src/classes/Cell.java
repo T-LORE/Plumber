@@ -61,7 +61,7 @@ public class Cell {
                 neighborCoords.translate(1, 0);
                 break;
         }
-        if (neighborCoords.x < 0 || neighborCoords.x >= _field.getHeight() || neighborCoords.y < 0 || neighborCoords.y >= _field.getWidth()) {
+        if (neighborCoords.x < 0 || neighborCoords.x >= _field.getWidth() || neighborCoords.y < 0 || neighborCoords.y >= _field.getHeight()) {
             return null;
         }
         return _field.getCell(neighborCoords);
