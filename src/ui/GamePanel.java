@@ -33,7 +33,7 @@ public class GamePanel extends JFrame {
         _game.addListener(new GameObserver());
         _content = (JPanel) getContentPane();
 
-        _playerActionWidget = _widgetFactory.createPlayerActionWidget(this, _game, _fieldWidget, _game.getPlayer());
+        _playerActionWidget = _widgetFactory.createPlayerActionWidget(this, _game.getPlayer());
         _content.setLayout(new BorderLayout());
         _content.add(_playerActionWidget, BorderLayout.SOUTH);
         pack();

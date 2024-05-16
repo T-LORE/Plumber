@@ -2,7 +2,6 @@ package ui;
 
 import classes.Cell;
 import classes.Field;
-import classes.Game;
 import classes.Player;
 import classes.entities.water_tanks.Drain;
 import classes.entities.water_tanks.Pipe;
@@ -55,8 +54,8 @@ public class WidgetFactory {
         return cellWidget;        
     }
 
-    public PlayerActionWidget createPlayerActionWidget(GamePanel panel, Game game, FieldWidget field, Player player) {
-        return new PlayerActionWidget(panel, game, this, player);
+    public PlayerActionWidget createPlayerActionWidget(GamePanel panel, Player player) {
+        return new PlayerActionWidget(panel, this, player);
     }
 
     public TexturedButton createStartWaterflowButton() {

@@ -8,7 +8,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-import classes.Game;
 import classes.Player;
 import ui.events.FieldWidgetEvent;
 import ui.events.FieldWidgetListener;
@@ -29,7 +28,7 @@ public class PlayerActionWidget extends JPanel {
     private TexturedButton _startFlowButton;
     private TexturedButton _loadLevelButton;
 
-    public PlayerActionWidget(GamePanel panel, Game game, WidgetFactory factory, Player player) {
+    public PlayerActionWidget(GamePanel panel, WidgetFactory factory, Player player) {
         setOpaque(false);
 
         _player = player;
