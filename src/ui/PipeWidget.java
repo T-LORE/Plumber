@@ -9,31 +9,13 @@ import classes.events.WaterTankActionEvent;
 import ui.events.PipeWidgetEvent;
 import ui.events.PipeWidgetListener;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.event.MouseAdapter;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 
 public class PipeWidget extends CellItemWidget {
-
-    Pipe _pipe;
-
-    private ArrayList<PipeWidgetListener> _listeners = new ArrayList<>();
-
-    public PipeWidget(Pipe pipe) {
-        super();
-        _pipe = pipe;
-        _pipe.addListener(new PipeListener());
-        setFocusable(true);
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        //setBackground(Color.decode("#800080"));
-        addMouseListener(new PipeWidgetClickListener());
-    }
-
     //constant path pipe
     private static final String BASE_EMPTY = "pipes/pipe_base_empty.png";
     private static final String BASE_FILLED = "pipes/pipe_base_filled.png";
@@ -45,6 +27,19 @@ public class PipeWidget extends CellItemWidget {
     private static final String LEFT_FILLED = "pipes/pipe_left_filled.png";
     private static final String RIGHT_EMPTY = "pipes/pipe_right_empty.png";
     private static final String RIGHT_FILLED = "pipes/pipe_right_filled.png";
+
+    Pipe _pipe;
+
+    private ArrayList<PipeWidgetListener> _listeners = new ArrayList<>();
+
+    public PipeWidget(Pipe pipe) {
+        super();
+        _pipe = pipe;
+        _pipe.addListener(new PipeListener());
+        setFocusable(true);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        addMouseListener(new PipeWidgetClickListener());
+    }
 
     @Override
     protected BufferedImage getImage() {
@@ -103,34 +98,14 @@ public class PipeWidget extends CellItemWidget {
         _listeners.add(listener);
     }
 
-
-
-    // PipeWidgetListener
     public class PipeWidgetClickListener extends MouseAdapter {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
             fireRotateEvent();
             repaint();
         }
-
-        @Override
-        public void mousePressed(java.awt.event.MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(java.awt.event.MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(java.awt.event.MouseEvent e) {
-        }
-
-        @Override
-        public void mouseExited(java.awt.event.MouseEvent e) {
-        }    
     }
 
-    //pipe action listener
     private class PipeListener implements PipeActionListener {
 
         @Override

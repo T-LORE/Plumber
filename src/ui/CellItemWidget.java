@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 
 public abstract class CellItemWidget extends JPanel {
-    
     protected static final int WIDTH = 100;
     protected static final int HEIGHT = 100;
 
@@ -30,6 +29,4 @@ public abstract class CellItemWidget extends JPanel {
         super.paintComponent(g);
         g.drawImage(getImage(), 0, 0, null);
     }
-
-
 }

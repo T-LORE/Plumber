@@ -46,7 +46,7 @@ public class PlayerActionWidget extends JPanel {
         TexturedButton restartButton = factory.createRestartButton();
         restartButton.addListener(new RestartButtonListener());
         _restartButton = restartButton;
-        // добавляем кнопку "Напрудить"
+        // добавляем кнопку "Открыть кран"
         TexturedButton startFlowButton = factory.createStartWaterflowButton();
         startFlowButton.addListener(new StartFlowButtonListener());
         _startFlowButton = startFlowButton;

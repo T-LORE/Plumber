@@ -5,15 +5,13 @@ import javax.swing.*;
 import classes.Cell;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class CellWidget extends JPanel {
     private static final int  CELL_SIZE = 100;
+    private static final Color BACKGROUND_COLOR = Color.decode("#888888");
 
     private Cell _cell;
-
-    private static final Color BACKGROUND_COLOR = Color.decode("#888888");
+    private CellItemWidget _item;
 
     public CellWidget(Cell cell) {
         _cell = cell;
@@ -22,8 +20,6 @@ public class CellWidget extends JPanel {
         setOpaque(false); 
         setBorder(BorderFactory.createLineBorder(Color.black));
     }
-
-    private CellItemWidget _item;
 
     public void addItem(CellItemWidget item) {
         if (_item != null) {

@@ -2,7 +2,6 @@ package ui;
 
 import classes.Cell;
 import classes.Field;
-import classes.Player;
 import ui.events.FieldWidgetEvent;
 import ui.events.FieldWidgetListener;
 import ui.events.PipeWidgetEvent;
@@ -13,24 +12,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class FieldWidget extends JPanel {
-
     private final Field _field;
     private final WidgetFactory _widgetFactory;
     
     private ArrayList<FieldWidgetListener> _listeners = new ArrayList<>();
     private ArrayList<CellWidget> _cellWidgets = new ArrayList<>();
 
-
     public FieldWidget(Field field, WidgetFactory widgetFactory) {
         _field = field;
         _widgetFactory = widgetFactory;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         fillField();
-
-        //background color gray
         setBackground(Color.decode("#D3D3D3"));
-
-        //margin between cells
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
@@ -41,7 +34,7 @@ public class FieldWidget extends JPanel {
             add(newRow);
         }
 
-        // подключить слушателей к трубам
+        // Подключить слушателей к трубам
         setUpPipeListeners();
     }
 

@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 public class SourceWidget  extends CellItemWidget {
     private static final String SOURCE = "source.png";
 
-    
     public SourceWidget() {
         super();
         setFocusable(true);

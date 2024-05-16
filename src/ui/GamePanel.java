@@ -15,7 +15,6 @@ public class GamePanel extends JFrame {
     private JPanel _content;
     private PlayerActionWidget _playerActionWidget;
     private FieldWidget _fieldWidget;
-    private String _levelPath = "field.txt";
 
     public GamePanel() throws HeadlessException {
         setVisible(true);
@@ -95,7 +94,7 @@ public class GamePanel extends JFrame {
 
         @Override
         public void waterTick(GameActionEvent event) {
-
+            System.out.println("Water tick");
         }
     }
 
