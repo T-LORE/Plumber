@@ -5,6 +5,8 @@ import classes.entities.water_tanks.Drain;
 import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.Source;
 import classes.entities.water_tanks.WaterTank;
+import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
+import classes.entities.water_tanks.water_tanks_ends.DefaultWaterTankEnd;
 
 import java.awt.*;
 import java.io.*;
@@ -120,14 +122,30 @@ public class Field {
                 possibleDirections.add(Direction.RIGHT);
             }
 
-            watertank.addPossibleDirections(possibleDirections);
+            watertank.addEnds(createDefaultEndsFromDirections(possibleDirections));
             watertanks.add(watertank);
         }
         _parseDictionary = new HashMap<String, ArrayList<Direction>>();
         for (WaterTank tank : watertanks)
         {
-            _parseDictionary.put(tank.toString(), tank.getPossibleDirections());
+            _parseDictionary.put(tank.toString(), getPossibleDirectionsFromTank(tank));
         }
+    }
+
+    private static ArrayList<AbstractWaterTankEnd> createDefaultEndsFromDirections(ArrayList<Direction> directions) {
+        ArrayList<AbstractWaterTankEnd> ends = new ArrayList<AbstractWaterTankEnd>();
+        for (Direction direction : directions) {
+            ends.add(new DefaultWaterTankEnd(direction));
+        }
+        return ends;
+    }
+
+    private static ArrayList<Direction> getPossibleDirectionsFromTank(WaterTank tank) {
+        ArrayList<Direction> possibleDirections = new ArrayList<Direction>();
+        for (AbstractWaterTankEnd end : tank.getEnds()) {
+            possibleDirections.add(end.getDirection());
+        }
+        return possibleDirections;
     }
 
     public static Field loadFromFile(String filename) throws IOException {
@@ -167,10 +185,12 @@ public class Field {
                         throw new IllegalArgumentException("Multiple sources in the field");
                     }
                     newSource = new Source();
-                    newSource.addPossibleDirection(Direction.UP);
-                    newSource.addPossibleDirection(Direction.DOWN);
-                    newSource.addPossibleDirection(Direction.LEFT);
-                    newSource.addPossibleDirection(Direction.RIGHT);
+
+                    //TODO: add the ability to add directions for source
+                    newSource.addEnd(new DefaultWaterTankEnd(Direction.UP));
+                    newSource.addEnd(new DefaultWaterTankEnd(Direction.DOWN));
+                    newSource.addEnd(new DefaultWaterTankEnd(Direction.LEFT));
+                    newSource.addEnd(new DefaultWaterTankEnd(Direction.RIGHT));
 
                     newSource.setCell(newCell);
                     newCell.setEntity(newSource);
@@ -180,10 +200,12 @@ public class Field {
                         throw new IllegalArgumentException("Multiple drains in the field");
                     }
                     newDrain = new Drain();
-                    newDrain.addPossibleDirection(Direction.UP);
-                    newDrain.addPossibleDirection(Direction.DOWN);
-                    newDrain.addPossibleDirection(Direction.LEFT);
-                    newDrain.addPossibleDirection(Direction.RIGHT);
+
+                    //TODO: add the ability to add directions for drain
+                    newDrain.addEnd(new DefaultWaterTankEnd(Direction.UP));
+                    newDrain.addEnd(new DefaultWaterTankEnd(Direction.DOWN));
+                    newDrain.addEnd(new DefaultWaterTankEnd(Direction.LEFT));
+                    newDrain.addEnd(new DefaultWaterTankEnd(Direction.RIGHT));
 
                     newDrain.setCell(newCell);
                     newCell.setEntity(newDrain);
@@ -191,7 +213,7 @@ public class Field {
                 } else  if (_parseDictionary.containsKey(cell)){
                     ArrayList<Direction> possibleDirections = _parseDictionary.get(cell);
                     Pipe pipe = new Pipe();
-                    pipe.addPossibleDirections(possibleDirections);
+                    pipe.addEnds(createDefaultEndsFromDirections(possibleDirections));
 
                     pipe.setCell(newCell);
                     newCell.setEntity(pipe);

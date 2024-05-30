@@ -51,7 +51,7 @@ public class Water {
         for (WaterTank waterTank : lastStep().keySet()) {
             HashMap<Direction, WaterTank> neighbours = waterTank.getConnectedWaterTanks();
             for (Direction direction : neighbours.keySet()) {
-                boolean isFilled = neighbours.get(direction).fillFromDirection(direction.turnAround(), Water.this);
+                boolean isFilled = neighbours.get(direction).fill(Water.this);
                 if (isFilled) {
                     newStep.put(neighbours.get(direction), direction.turnAround());
                 }

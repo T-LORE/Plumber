@@ -4,6 +4,7 @@ import classes.Cell;
 import classes.Direction;
 import classes.Water;
 import classes.entities.Entity;
+import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
 import classes.events.WaterTankActionEvent;
 import classes.events.WaterTankActionListener;
 
@@ -11,53 +12,61 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WaterTank extends Entity {
-    private ArrayList<Direction> _possibleDirections;
+    private ArrayList<AbstractWaterTankEnd> _ends = new ArrayList<AbstractWaterTankEnd>();
     private Water _water;
     protected ArrayList<WaterTankActionListener> _listeners = new ArrayList<WaterTankActionListener>();
 
     public WaterTank() {
-        _possibleDirections = new ArrayList<Direction>();
+        super();
     }
 
-    public void addPossibleDirection(Direction direction) {
-        if (!_possibleDirections.contains(direction))
-        {
-           _possibleDirections.add(direction);
+    public boolean addEnd(AbstractWaterTankEnd end) {
+        if (_ends.contains(end)) {
+            System.out.println("End already exists");
+            return false;
+        }
+
+        if (end.setParentWaterTank(this)) {
+            _ends.add(end);
+            return true;
+        }
+        return false;      
+    }
+
+    public void addEnds(ArrayList<AbstractWaterTankEnd> ends) {
+        for (AbstractWaterTankEnd end : ends) {
+            addEnd(end);
         }
     }
 
-    public void addPossibleDirections(ArrayList<Direction> directions) {
-        for (Direction direction : directions) {
-            addPossibleDirection(direction);
+    public void removeEnd(AbstractWaterTankEnd end) {
+        _ends.remove(end);
+    }
+
+    public void removeEnds(ArrayList<AbstractWaterTankEnd> ends) {
+        for (AbstractWaterTankEnd end : ends) {
+            removeEnd(end);
         }
     }
 
-    public void removePossibleDirection(Direction direction) {
-        _possibleDirections.remove(direction);
+    public void clearEnds() {
+        _ends.clear();
     }
 
-    public void removePossibleDirections(ArrayList<Direction> directions) {
-        for (Direction direction : directions) {
-            removePossibleDirection(direction);
+    public ArrayList<AbstractWaterTankEnd> getEnds() {
+        return _ends;
+    }
+
+    public AbstractWaterTankEnd getEnd(Direction direction) {
+        for (AbstractWaterTankEnd end : _ends) {
+            if (end.getDirection() == direction) {
+                return end;
+            }
         }
+        return null;
     }
 
-    public void clearPossibleDirections() {
-        _possibleDirections.clear();
-    }
-
-    public ArrayList<Direction> getPossibleDirections() {
-        return new ArrayList<Direction>(_possibleDirections);
-    }
-
-    public boolean fillFromDirection(Direction direction, Water water) {
-        if (_possibleDirections.contains(direction)) {
-            return fill(water);
-        }
-        return false;
-    }
-
-    protected boolean fill(Water water){
+    public boolean fill(Water water){
         if (_water == null)
         {
             _water = water;
@@ -67,27 +76,27 @@ public class WaterTank extends Entity {
         return false;
     }
 
-    public boolean reachableFrom(Direction direction) {
-        return _possibleDirections.contains(direction);
+    public WaterTank getNeighbour(Direction direction) {
+        Cell cell = getCell().getNeighbor(direction);
+        if (cell == null)
+        {
+            return null;
+        }
+        Entity entity = cell.getEntity();
+        if (entity instanceof WaterTank waterTank) {
+            return waterTank;
+        }
+        return null;
     }
 
     public HashMap<Direction, WaterTank> getConnectedWaterTanks() {
-        HashMap<Direction, WaterTank> result = new HashMap<Direction, WaterTank>();
-        for (Direction direction : _possibleDirections) {
-            Cell cell = getCell().getNeighbor(direction);
-            if (cell == null)
-            {
-                continue;
-            }
-            Entity entity = cell.getEntity();
-            if (entity instanceof WaterTank waterTank) {
-                if (waterTank.reachableFrom(direction.turnAround()))
-                {
-                    result.put(direction, waterTank);
-                }
+        HashMap<Direction, WaterTank> connectedWaterTanks = new HashMap<>();
+        for (AbstractWaterTankEnd end : _ends) {
+            if (end.getConnectedNeighbour() != null) {
+                connectedWaterTanks.put(end.getDirection(), end.getConnectedNeighbour());
             }
         }
-        return result;
+        return connectedWaterTanks;
     }
 
     public Water getWater() {
@@ -147,14 +156,22 @@ public class WaterTank extends Entity {
         }
          
         String key = "";
-        key += _possibleDirections.contains(Direction.UP) ? "1" : "0";
-        key += _possibleDirections.contains(Direction.DOWN) ? "1" : "0";
-        key += _possibleDirections.contains(Direction.LEFT) ? "1" : "0";
-        key += _possibleDirections.contains(Direction.RIGHT) ? "1" : "0";
+        key += isHaveEnd(Direction.UP) ? "1" : "0";
+        key += isHaveEnd(Direction.DOWN) ? "1" : "0";
+        key += isHaveEnd(Direction.LEFT) ? "1" : "0";
+        key += isHaveEnd(Direction.RIGHT) ? "1" : "0";
         key += _water == null ? "0" : "1";
 
         return _dict.get(key);
     }
 
+    private boolean isHaveEnd(Direction direction) {
+        for (AbstractWaterTankEnd end : _ends) {
+            if (end.getDirection() == direction) {
+                return true;
+            }
+        }
+        return false;
+    }
  
 }
