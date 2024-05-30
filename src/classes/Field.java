@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Field {
+
+    private final static int MAX_WIDTH = 15;
+    private final static int MAX_HEIGHT = 7;
+
     private int _height;
     private int _width;
 
@@ -140,8 +144,12 @@ public class Field {
         String[] dimensions = reader.readLine().split(" ");
         int width = Integer.parseInt(dimensions[0]);
         int height = Integer.parseInt(dimensions[1]);
-        if (height <= 0 || width <= 0) {
+        if (height < 2 || width < 2) {
             throw new IllegalArgumentException("Invalid field dimensions: " + height + " " + width);
+        }
+
+        if (height > MAX_HEIGHT || width > MAX_WIDTH) {
+            throw new IllegalArgumentException("Field size too big (max 15x7): " + height + " " + width);
         }
 
         Field field = new Field(height, width);
