@@ -6,20 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4f09ae5a-fca1-4360-9de9-b9132dd4e8de" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/DrainTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DrainTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/FieldTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/FieldTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/GameTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/GameTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/MockEvents/MockDrainActionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/MockEvents/MockPlayerActionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/MockEvents/MockUserInputHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/PipeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PipeTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/PlayerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PlayerTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/ConsoleUserInput.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/UserInputHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/events/UserInputEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/events/UserInputListener.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +46,10 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "separate-pipes-and-pipes-ends",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tlore/Desktop/Учеба/3 курс/2 сем/OOP/Plumber"
+    "last_opened_file_path": "C:/Users/tlore/Desktop/Учеба/3 курс/2 сем/OOP/Plumber",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RunManager" selected="Application.Run">
