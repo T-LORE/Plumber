@@ -34,6 +34,14 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
         return _material;
     }
 
+    @Override
+    public boolean setParentWaterTank(WaterTank parentWaterTank) {
+        if (parentWaterTank.getMaterial().isCompatible(_material)) {
+            _parentWaterTank = parentWaterTank;
+            return true;
+        }
+        return false;
+    }
     public void setMaterial(MaterialNode material) {
         _material = material;
     }
