@@ -2,7 +2,7 @@ package classes.entities.water_tanks.water_tanks_ends;
 
 import classes.Direction;
 import classes.MaterialNode;
-import classes.entities.water_tanks.WaterTank;
+import classes.entities.water_tanks.AbstractWaterTank;
 
 public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
     MaterialNode _material;
@@ -13,15 +13,15 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
     }
     
     @Override
-    public WaterTank getConnectedNeighbour() {
-        WaterTank neighbourWaterTank = getParentWaterTank().getNeighbour(getDirection());
+    public AbstractWaterTank getConnectedNeighbour() {
+        AbstractWaterTank neighbourAbstractWaterTank = getParentWaterTank().getNeighbour(getDirection());
 
-        if (neighbourWaterTank != null) {
-            AbstractWaterTankEnd neighbourEnd = neighbourWaterTank.getEnd(getDirection().turnAround());
+        if (neighbourAbstractWaterTank != null) {
+            AbstractWaterTankEnd neighbourEnd = neighbourAbstractWaterTank.getEnd(getDirection().turnAround());
             if (neighbourEnd instanceof MaterialWaterTankEnd) {
                 MaterialNode neighbourMaterial = ((MaterialWaterTankEnd) neighbourEnd).getMaterial();
                 if (_material.isCompatible(neighbourMaterial)) {
-                    return neighbourWaterTank;
+                    return neighbourAbstractWaterTank;
                 }
             }
         }
@@ -34,9 +34,9 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
     }
 
     @Override
-    public boolean setParentWaterTank(WaterTank parentWaterTank) {
-        if (parentWaterTank.getMaterial().isCompatible(_material)) {
-            _parentWaterTank = parentWaterTank;
+    public boolean setParentWaterTank(AbstractWaterTank parentAbstractWaterTank) {
+        if (parentAbstractWaterTank.getMaterial().isCompatible(_material)) {
+            _parentAbstractWaterTank = parentAbstractWaterTank;
             return true;
         }
         return false;

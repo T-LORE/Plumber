@@ -3,7 +3,7 @@ package Tests;
 import classes.Direction;
 import classes.Field;
 import classes.Water;
-import classes.entities.water_tanks.WaterTank;
+import classes.entities.water_tanks.AbstractWaterTank;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -15,11 +15,11 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class WaterTankTests {
+public class AbstractWaterTankTests {
 
     @Test
     public void testAddPossibleDirection() {
-        WaterTank waterTank = new WaterTank();
+        AbstractWaterTank abstractWaterTank = new AbstractWaterTank();
 //        waterTank.addPossibleDirection(Direction.UP);
 //        waterTank.addPossibleDirection(Direction.LEFT);
 //        waterTank.addPossibleDirection(Direction.RIGHT);
@@ -31,7 +31,7 @@ public class WaterTankTests {
 
     @Test
     public void testAddPossibleDirections() {
-        WaterTank waterTank = new WaterTank();
+        AbstractWaterTank abstractWaterTank = new AbstractWaterTank();
         ArrayList<Direction> directions = new ArrayList<>();
         directions.add(Direction.UP);
         directions.add(Direction.DOWN);
@@ -45,7 +45,7 @@ public class WaterTankTests {
 
     @Test
     public void testRemovePossibleDirection() {
-        WaterTank waterTank = new WaterTank();
+        AbstractWaterTank abstractWaterTank = new AbstractWaterTank();
 //        waterTank.addPossibleDirection(Direction.UP);
 //        waterTank.addPossibleDirection(Direction.LEFT);
 //        waterTank.addPossibleDirection(Direction.RIGHT);
@@ -57,7 +57,7 @@ public class WaterTankTests {
 
     @Test
     public void testRemovePossibleDirections() {
-        WaterTank waterTank = new WaterTank();
+        AbstractWaterTank abstractWaterTank = new AbstractWaterTank();
         ArrayList<Direction> directions = new ArrayList<>();
         directions.add(Direction.UP);
         directions.add(Direction.DOWN);
@@ -69,7 +69,7 @@ public class WaterTankTests {
 
     @Test
     public void testClearPossibleDirections() {
-        WaterTank waterTank = new WaterTank();
+        AbstractWaterTank abstractWaterTank = new AbstractWaterTank();
 //        waterTank.addPossibleDirection(Direction.UP);
 //        waterTank.addPossibleDirection(Direction.LEFT);
 //        waterTank.addPossibleDirection(Direction.RIGHT);
@@ -96,11 +96,11 @@ public class WaterTankTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
         
-        WaterTank start = field.getPipeOnCords(new Point(1, 1));
-        HashMap<Direction, WaterTank> expectedConnected = new HashMap<>();
+        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
         expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
 
-        HashMap<Direction, WaterTank> actualConnected = start.getConnectedWaterTanks();
+        HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
         
         for (Direction direction : expectedConnected.keySet()) {
@@ -132,12 +132,12 @@ public class WaterTankTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        WaterTank start = field.getPipeOnCords(new Point(1, 1));
-        HashMap<Direction, WaterTank> expectedConnected = new HashMap<>();
+        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
         expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
         expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(1, 2)));
 
-        HashMap<Direction, WaterTank> actualConnected = start.getConnectedWaterTanks();
+        HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
 
         for (Direction direction : expectedConnected.keySet()) {
@@ -169,13 +169,13 @@ public class WaterTankTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        WaterTank start = field.getPipeOnCords(new Point(1, 1));
-        HashMap<Direction, WaterTank> expectedConnected = new HashMap<>();
+        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
         expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
         expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(1, 2)));
         expectedConnected.put(Direction.RIGHT, field.getPipeOnCords(new Point(2, 1)));
 
-        HashMap<Direction, WaterTank> actualConnected = start.getConnectedWaterTanks();
+        HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
 
         for (Direction direction : expectedConnected.keySet()) {
@@ -207,14 +207,14 @@ public class WaterTankTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        WaterTank start = field.getPipeOnCords(new Point(1, 1));
-        HashMap<Direction, WaterTank> expectedConnected = new HashMap<>();
+        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
         expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
         expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(1, 2)));
         expectedConnected.put(Direction.RIGHT, field.getPipeOnCords(new Point(2, 1)));
         expectedConnected.put(Direction.LEFT, field.getPipeOnCords(new Point(0, 1)));
 
-        HashMap<Direction, WaterTank> actualConnected = start.getConnectedWaterTanks();
+        HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
 
         for (Direction direction : expectedConnected.keySet()) {
@@ -246,11 +246,11 @@ public class WaterTankTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        WaterTank start = field.getPipeOnCords(new Point(2, 0));
-        HashMap<Direction, WaterTank> expectedConnected = new HashMap<>();
+        AbstractWaterTank start = field.getPipeOnCords(new Point(2, 0));
+        HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
         expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(2, 1)));
 
-        HashMap<Direction, WaterTank> actualConnected = start.getConnectedWaterTanks();
+        HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
 
         for (Direction direction : expectedConnected.keySet()) {
@@ -266,34 +266,34 @@ public class WaterTankTests {
 
     @Test
     void fillFromOnePossibleDirection() {
-        WaterTank source = new WaterTank();
+        AbstractWaterTank source = new AbstractWaterTank();
         Water water = new Water(source);
-        WaterTank testWaterTank = new WaterTank();
+        AbstractWaterTank testAbstractWaterTank = new AbstractWaterTank();
 //        testWaterTank.addPossibleDirection(Direction.UP);
 //
 //        boolean isFilled = testWaterTank.fillFromDirection(Direction.UP, water);
 //        assertTrue(isFilled);
-        assertEquals(water, testWaterTank.getWater());   
+        assertEquals(water, testAbstractWaterTank.getWater());
     }
 
     @Test
     void fillFromNotPossibleDirection() {
-        WaterTank source = new WaterTank();
+        AbstractWaterTank source = new AbstractWaterTank();
         Water water = new Water(source);
-        WaterTank testWaterTank = new WaterTank();
+        AbstractWaterTank testAbstractWaterTank = new AbstractWaterTank();
 //        testWaterTank.addPossibleDirection(Direction.UP);
 //
 //        boolean isFilled = testWaterTank.fillFromDirection(Direction.DOWN, water);
 //        assertFalse(isFilled);
-        assertNull(testWaterTank.getWater());
+        assertNull(testAbstractWaterTank.getWater());
     }
 
     @Test
     void doubleFilled() {
-        WaterTank source = new WaterTank();
+        AbstractWaterTank source = new AbstractWaterTank();
         Water water1 = new Water(source);
         Water water2 = new Water(source);
-        WaterTank testWaterTank = new WaterTank();
+        AbstractWaterTank testAbstractWaterTank = new AbstractWaterTank();
 //        testWaterTank.addPossibleDirection(Direction.UP);
 
 //        boolean isFilled1 = testWaterTank.fillFromDirection(Direction.UP, water1);
@@ -301,15 +301,15 @@ public class WaterTankTests {
 //        assertTrue(isFilled1);
 //        assertFalse(isFilled2);
 
-        assertEquals(water1, testWaterTank.getWater());
+        assertEquals(water1, testAbstractWaterTank.getWater());
     }
 
     @Test
     public void testToString() {
-        WaterTank waterTank = new WaterTank();
+        AbstractWaterTank abstractWaterTank = new AbstractWaterTank();
 //        waterTank.addPossibleDirection(Direction.DOWN);
 //        waterTank.addPossibleDirection(Direction.LEFT);
 //        waterTank.addPossibleDirection(Direction.RIGHT);
-        assertEquals("╦", waterTank.toString());
+        assertEquals("╦", abstractWaterTank.toString());
     }
 }

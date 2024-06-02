@@ -2,16 +2,10 @@ package Tests;
 import classes.Cell;
 import classes.Direction;
 import classes.Field;
-import classes.Water;
-import classes.entities.Entity;
-import classes.entities.water_tanks.WaterTank;
+import classes.entities.water_tanks.AbstractWaterTank;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -32,7 +26,7 @@ public class CellTests {
         Cell cell = new Cell();
         Field field = new Field(1, 1);
         cell.setField(field, new Point(0, 0));
-        WaterTank pipe = new WaterTank();
+        AbstractWaterTank pipe = new AbstractWaterTank();
         cell.setEntity(pipe);
         assertEquals(pipe, cell.getEntity());
     }
@@ -96,7 +90,7 @@ public class CellTests {
     @Test
     void toStringWithEntity() {
         Cell cell = new Cell();
-        WaterTank pipe = new WaterTank();
+        AbstractWaterTank pipe = new AbstractWaterTank();
         cell.setEntity(pipe);
         assertEquals("○", cell.toString());
     }

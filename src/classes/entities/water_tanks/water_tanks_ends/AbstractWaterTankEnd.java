@@ -1,11 +1,11 @@
 package classes.entities.water_tanks.water_tanks_ends;
 
 import classes.Direction;
-import classes.entities.water_tanks.WaterTank;
+import classes.entities.water_tanks.AbstractWaterTank;
 
 public abstract class AbstractWaterTankEnd {
     Direction _direction;
-    WaterTank _parentWaterTank;
+    AbstractWaterTank _parentAbstractWaterTank;
 
     public AbstractWaterTankEnd(Direction direction) {
         _direction = direction;
@@ -19,15 +19,15 @@ public abstract class AbstractWaterTankEnd {
         _direction = _direction.rotateClockwise();
     }
 
-    public boolean setParentWaterTank(WaterTank parentWaterTank) {
-        _parentWaterTank = parentWaterTank;
+    public boolean setParentWaterTank(AbstractWaterTank parentAbstractWaterTank) {
+        _parentAbstractWaterTank = parentAbstractWaterTank;
         return true;
     }
 
-    public abstract WaterTank getConnectedNeighbour();
+    public abstract AbstractWaterTank getConnectedNeighbour();
 
-    public WaterTank getParentWaterTank() {
-        return _parentWaterTank;
+    public AbstractWaterTank getParentWaterTank() {
+        return _parentAbstractWaterTank;
     }
 
     @Override

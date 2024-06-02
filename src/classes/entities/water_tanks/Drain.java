@@ -6,7 +6,7 @@ import classes.events.DrainActionListener;
 
 import java.util.ArrayList;
 
-public class Drain extends WaterTank {
+public class Drain extends AbstractWaterTank {
     private ArrayList<DrainActionListener> _listeners = new ArrayList<>();
 
     public Drain(){

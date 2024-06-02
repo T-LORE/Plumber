@@ -5,7 +5,7 @@ import classes.events.PipeActionListener;
 import classes.events.WaterTankActionListener;
 
 
-public class Pipe extends WaterTank {
+public class Pipe extends AbstractWaterTank {
     
     public Pipe() {
         super();

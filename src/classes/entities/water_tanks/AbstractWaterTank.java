@@ -14,13 +14,13 @@ import classes.events.WaterTankActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class WaterTank extends Entity {
+public class AbstractWaterTank extends Entity {
     private ArrayList<AbstractWaterTankEnd> _ends = new ArrayList<AbstractWaterTankEnd>();
     private Water _water;
     protected ArrayList<WaterTankActionListener> _listeners = new ArrayList<WaterTankActionListener>();
     protected MaterialNode _material;
     
-    public WaterTank() {
+    public AbstractWaterTank() {
         super();
     }
 
@@ -80,21 +80,21 @@ public class WaterTank extends Entity {
         return false;
     }
 
-    public WaterTank getNeighbour(Direction direction) {
+    public AbstractWaterTank getNeighbour(Direction direction) {
         Cell cell = getCell().getNeighbor(direction);
         if (cell == null)
         {
             return null;
         }
         Entity entity = cell.getEntity();
-        if (entity instanceof WaterTank waterTank) {
-            return waterTank;
+        if (entity instanceof AbstractWaterTank abstractWaterTank) {
+            return abstractWaterTank;
         }
         return null;
     }
 
-    public HashMap<Direction, WaterTank> getConnectedWaterTanks() {
-        HashMap<Direction, WaterTank> connectedWaterTanks = new HashMap<>();
+    public HashMap<Direction, AbstractWaterTank> getConnectedWaterTanks() {
+        HashMap<Direction, AbstractWaterTank> connectedWaterTanks = new HashMap<>();
         for (AbstractWaterTankEnd end : _ends) {
             if (end.getConnectedNeighbour() != null) {
                 connectedWaterTanks.put(end.getDirection(), end.getConnectedNeighbour());

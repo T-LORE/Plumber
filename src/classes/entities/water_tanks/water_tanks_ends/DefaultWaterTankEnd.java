@@ -1,7 +1,7 @@
 package classes.entities.water_tanks.water_tanks_ends;
 
 import classes.Direction;
-import classes.entities.water_tanks.WaterTank;
+import classes.entities.water_tanks.AbstractWaterTank;
 
 public class DefaultWaterTankEnd extends AbstractWaterTankEnd {
     public DefaultWaterTankEnd(Direction direction) {
@@ -9,19 +9,19 @@ public class DefaultWaterTankEnd extends AbstractWaterTankEnd {
     }
 
     @Override
-    public WaterTank getConnectedNeighbour() {
-        WaterTank neighWaterTank = getNeighbour(getDirection());
+    public AbstractWaterTank getConnectedNeighbour() {
+        AbstractWaterTank neighAbstractWaterTank = getNeighbour(getDirection());
 
-        if (neighWaterTank != null) {
+        if (neighAbstractWaterTank != null) {
             //check if the neighbour has a DefaultWaterTankEnd in the opposite direction
-            if (neighWaterTank.getEnd(getDirection().turnAround()) instanceof DefaultWaterTankEnd) {
-                return neighWaterTank;
+            if (neighAbstractWaterTank.getEnd(getDirection().turnAround()) instanceof DefaultWaterTankEnd) {
+                return neighAbstractWaterTank;
             }
         }
         return null;
     }
 
-    private WaterTank getNeighbour(Direction direction) {
+    private AbstractWaterTank getNeighbour(Direction direction) {
         return getParentWaterTank().getNeighbour(direction);
     }
 

@@ -6,7 +6,7 @@ import classes.Player;
 import classes.entities.water_tanks.Drain;
 import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.Source;
-import classes.entities.water_tanks.WaterTank;
+import classes.entities.water_tanks.AbstractWaterTank;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class WidgetFactory {
 
     private final Map<Cell, CellWidget> cells = new HashMap<>();
 
-    private final Map<WaterTank, CellItemWidget> waterTanks = new HashMap<>();
+    private final Map<AbstractWaterTank, CellItemWidget> waterTanks = new HashMap<>();
 
     public FieldWidget createFieldWidget(Field field) {
         return new FieldWidget(field, this);
@@ -28,25 +28,25 @@ public class WidgetFactory {
 
         CellWidget cellWidget = new CellWidget(cell);
 
-        WaterTank waterTank = (WaterTank) cell.getEntity();
-        if (waterTank != null) {
-            if (waterTanks.containsKey(waterTank)) {
+        AbstractWaterTank abstractWaterTank = (AbstractWaterTank) cell.getEntity();
+        if (abstractWaterTank != null) {
+            if (waterTanks.containsKey(abstractWaterTank)) {
                 throw new IllegalStateException("Water tank already has a widget");
             }
 
-            if (waterTank instanceof Pipe) {
-                waterTanks.put(waterTank, new PipeWidget((Pipe) waterTank));
-                cellWidget.addItem(waterTanks.get(waterTank));
+            if (abstractWaterTank instanceof Pipe) {
+                waterTanks.put(abstractWaterTank, new PipeWidget((Pipe) abstractWaterTank));
+                cellWidget.addItem(waterTanks.get(abstractWaterTank));
             }
 
-            if (waterTank instanceof Source) {
-                waterTanks.put(waterTank, new SourceWidget((Source) waterTank));
-                cellWidget.addItem(waterTanks.get(waterTank));
+            if (abstractWaterTank instanceof Source) {
+                waterTanks.put(abstractWaterTank, new SourceWidget((Source) abstractWaterTank));
+                cellWidget.addItem(waterTanks.get(abstractWaterTank));
             }
 
-            if (waterTank instanceof Drain) {
-                waterTanks.put(waterTank, new DrainWidget((Drain) waterTank));
-                cellWidget.addItem(waterTanks.get(waterTank));
+            if (abstractWaterTank instanceof Drain) {
+                waterTanks.put(abstractWaterTank, new DrainWidget((Drain) abstractWaterTank));
+                cellWidget.addItem(waterTanks.get(abstractWaterTank));
             }
         }
 

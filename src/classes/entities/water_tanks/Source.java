@@ -2,7 +2,7 @@ package classes.entities.water_tanks;
 
 import classes.Water;
 
-public class Source extends WaterTank {
+public class Source extends AbstractWaterTank {
     
     public Source(){
         super();
