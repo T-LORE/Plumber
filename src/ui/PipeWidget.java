@@ -4,9 +4,8 @@ import classes.Direction;
 import classes.Water;
 import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
-import classes.entities.water_tanks.water_tanks_ends.MaterialWaterTankEnd;
-import classes.events.PipeActionEvent;
-import classes.events.PipeActionListener;
+import classes.events.RotatableWaterTankActionEvent;
+import classes.events.RotatableWaterTankActionListener;
 import classes.events.WaterTankActionEvent;
 import ui.events.PipeWidgetEvent;
 import ui.events.PipeWidgetListener;
@@ -134,10 +133,10 @@ public class PipeWidget extends CellItemWidget {
         System.out.println("{x: " + x + "; y: " + y + "; isWater: " + isWaterIn + "; " + endsInfo + "}");
     }
 
-    private class PipeListener implements PipeActionListener {
+    private class PipeListener implements RotatableWaterTankActionListener {
 
         @Override
-        public void pipeRotated(PipeActionEvent e) {
+        public void pipeRotated(RotatableWaterTankActionEvent e) {
             repaint();
         }
 

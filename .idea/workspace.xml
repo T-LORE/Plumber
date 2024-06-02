@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f09ae5a-fca1-4360-9de9-b9132dd4e8de" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/Pipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/Pipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/events/PipeActionEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/events/RotatableWaterTankActionEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/events/PipeActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/events/RotatableWaterTankActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/PipeWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/PipeWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +47,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "separate-pipes-and-pipes-ends",
+    "git-widget-placeholder": "fitting",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/tlore/Desktop/Учеба/3 курс/2 сем/OOP/Plumber",
     "project.structure.last.edited": "Modules",
