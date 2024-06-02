@@ -33,4 +33,8 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
     public MaterialNode getMaterial() {
         return _material;
     }
+
+    public void setMaterial(MaterialNode material) {
+        _material = material;
+    }
 }
