@@ -3,6 +3,7 @@ package classes.entities.water_tanks;
 import classes.Cell;
 import classes.Direction;
 import classes.MaterialNode;
+import classes.MaterialNode.MaterialType;
 import classes.Water;
 import classes.entities.Entity;
 import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
@@ -183,6 +184,51 @@ public class WaterTank extends Entity {
 
     public void setMaterial(MaterialNode material) {
         _material = material;
+    }
+
+    public void configureTankWithOneMaterial(String config, MaterialNode materialRoot) {
+        // <<Материал трубы>>; <<Верхний выход (1 или 0)>>; <<Правый выход (1 или 0)>>; <<Нижний выход (1 или 0)>>; <<Левый выход (1 или 0)>>
+        String[] configSplit = config.split(";");
+        if (configSplit.length != 5) {
+            throw new IllegalArgumentException("Invalid one material tank configuration: " + config);
+        }
+
+        String materialName = configSplit[0];
+        String newConfig = materialName + ";";
+
+        for (int i = 1; i < 5; i++) {
+            newConfig += (configSplit[i].equals("1") ? materialName : "null") + ";";
+        }
+
+        configureTankEndsToMaterial(newConfig, materialRoot);
+    }
+
+    public void configureTankEndsToMaterial(String config, MaterialNode materialRoot) {
+        // <<Материал танка>>; <<материал верхнего конца>>; <<материал правого конца>>; <<материал нижнего конца>>; <материал левого конца>>
+        String[] configParts = config.split(";");
+        if (configParts.length != 5) {
+            throw new IllegalArgumentException("Invalid tank configuration: " + config);
+        }
+
+        MaterialNode pipeMaterial = materialRoot.getChildMaterial(MaterialType.valueOf(configParts[0]));
+        if (pipeMaterial == null) {
+            throw new IllegalArgumentException("Invalid material: " + configParts[0]);
+        }
+
+        setMaterial(pipeMaterial);
+        clearEnds();
+
+        for (int i = 1; i < 5; i++) {
+            if (configParts[i].equals("null")) {
+                continue;
+            }
+            
+            MaterialNode outsideMaterial = materialRoot.getChildMaterial(MaterialType.valueOf(configParts[i]));
+            if (outsideMaterial == null) {
+                throw new IllegalArgumentException("Invalid end material: " + configParts[i]);
+            }
+            addEnd(new MaterialWaterTankEnd(Direction.values()[i - 1], outsideMaterial));
+        }
     }
  
 }
