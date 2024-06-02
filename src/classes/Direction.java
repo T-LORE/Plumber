@@ -30,4 +30,20 @@ public enum Direction{
         return Direction.values()[nextIndex];
     }
 
+    @Override
+    public String toString() {
+        switch (this) {
+            case UP:
+                return "UP";
+            case RIGHT:
+                return "RIGHT";
+            case DOWN:
+                return "DOWN";
+            case LEFT:
+                return "LEFT";
+            default:
+                return "UNKNOWN";
+        }
+    }
+
 }
