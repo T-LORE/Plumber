@@ -3,6 +3,8 @@ package ui;
 import classes.Direction;
 import classes.Water;
 import classes.entities.water_tanks.Pipe;
+import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
+import classes.entities.water_tanks.water_tanks_ends.MaterialWaterTankEnd;
 import classes.events.PipeActionEvent;
 import classes.events.PipeActionListener;
 import classes.events.WaterTankActionEvent;
@@ -111,6 +113,25 @@ public class PipeWidget extends CellItemWidget {
             fireRotateEvent();
             repaint();
         }
+
+        @Override
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+            printPipeInfo();
+        }
+    }
+
+    private void printPipeInfo() {
+       
+        int x = (int) getCellWidget().getCell().getCoords().getX();
+        int y = (int) getCellWidget().getCell().getCoords().getY();
+
+        String isWaterIn = _pipe.getWater() != null ? "true" : "false";
+        String endsInfo = "";
+        for (AbstractWaterTankEnd end : _pipe.getEnds()) {  
+           endsInfo += end.toString() + "; ";
+        }
+
+        System.out.println("{x: " + x + "; y: " + y + "; isWater: " + isWaterIn + "; " + endsInfo + "}");
     }
 
     private class PipeListener implements PipeActionListener {

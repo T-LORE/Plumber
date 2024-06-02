@@ -40,12 +40,12 @@ public class WidgetFactory {
             }
 
             if (waterTank instanceof Source) {
-                waterTanks.put(waterTank, new SourceWidget());
+                waterTanks.put(waterTank, new SourceWidget((Source) waterTank));
                 cellWidget.addItem(waterTanks.get(waterTank));
             }
 
             if (waterTank instanceof Drain) {
-                waterTanks.put(waterTank, new DrainWidget());
+                waterTanks.put(waterTank, new DrainWidget((Drain) waterTank));
                 cellWidget.addItem(waterTanks.get(waterTank));
             }
         }
