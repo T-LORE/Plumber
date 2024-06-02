@@ -2,7 +2,6 @@ package classes.entities.water_tanks.water_tanks_ends;
 
 import classes.Direction;
 import classes.MaterialNode;
-import classes.MaterialNode.MaterialType;
 import classes.entities.water_tanks.WaterTank;
 
 public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
