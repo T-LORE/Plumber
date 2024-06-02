@@ -2,9 +2,11 @@ package classes.entities.water_tanks;
 
 import classes.Cell;
 import classes.Direction;
+import classes.MaterialNode;
 import classes.Water;
 import classes.entities.Entity;
 import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
+import classes.entities.water_tanks.water_tanks_ends.MaterialWaterTankEnd;
 import classes.events.WaterTankActionEvent;
 import classes.events.WaterTankActionListener;
 
@@ -15,7 +17,8 @@ public class WaterTank extends Entity {
     private ArrayList<AbstractWaterTankEnd> _ends = new ArrayList<AbstractWaterTankEnd>();
     private Water _water;
     protected ArrayList<WaterTankActionListener> _listeners = new ArrayList<WaterTankActionListener>();
-
+    protected MaterialNode _material;
+    
     public WaterTank() {
         super();
     }
@@ -172,6 +175,14 @@ public class WaterTank extends Entity {
             }
         }
         return false;
+    }
+
+    public MaterialNode getMaterial() {
+        return _material;    
+    }
+
+    public void setMaterial(MaterialNode material) {
+        _material = material;
     }
  
 }
