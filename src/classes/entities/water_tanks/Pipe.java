@@ -1,10 +1,9 @@
 package classes.entities.water_tanks;
-import classes.Direction;
+import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
 import classes.events.PipeActionEvent;
 import classes.events.PipeActionListener;
 import classes.events.WaterTankActionListener;
 
-import java.util.ArrayList;
 
 public class Pipe extends WaterTank {
     
@@ -12,24 +11,11 @@ public class Pipe extends WaterTank {
         super();
     }
     
-    public void rotateClockwise() {  
-        ArrayList<Direction> newDirections = new ArrayList<Direction>();
-        for (Direction direction : getPossibleDirections()) {
-            newDirections.add(direction.rotateClockwise());
+    public void rotateClockwise() {
+        for (AbstractWaterTankEnd end : getEnds()) {
+            end.rotateClockwise();
         }
-        clearPossibleDirections();
-        addPossibleDirections(newDirections);
-        fireRotatedEvent();
-    }
-
-    public void rotateCounterClockwise() {
-        ArrayList<Direction> newDirections = new ArrayList<Direction>();
-        for (Direction direction : getPossibleDirections()) {
-            newDirections.add(direction.rotateCounterClockwise());
-        }
-        clearPossibleDirections();
-        addPossibleDirections(newDirections);
-        fireRotatedEvent();
+        fireRotatedEvent();  
     }
 
     private void fireRotatedEvent() {

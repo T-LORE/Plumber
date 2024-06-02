@@ -28,14 +28,6 @@ public class Game {
 
     private ArrayList<GameActionListener> _listeners = new ArrayList<>();
 
-    public Game(UserInputHandler eventSimulator) {
-        UserInputObserver userInputObserver = new UserInputObserver();
-        eventSimulator.addListener(userInputObserver);
-        _player = new Player(eventSimulator);
-        _player.addListener(new PlayerObserver());
-        setGameStatus(GameStatus.END_GAME_PHASE);
-    }
-
     public Game() {
         _player = new Player();
         _player.addListener(new PlayerObserver());
@@ -139,24 +131,6 @@ public class Game {
         @Override
         public void filled(DrainActionEvent event) {
             onDrainFilled();
-        }
-    }
-
-    private class UserInputObserver implements UserInputListener {
-
-        @Override
-        public void rotateClockwise(UserInputEvent event) {
-
-        }
-
-        @Override
-        public void startFlow(UserInputEvent event) {
-            startWaterFlow();
-        }
-
-        @Override
-        public void loadLevel(UserInputEvent event) throws IOException {
-            prepareLevel(event.levelPath);
         }
     }
 

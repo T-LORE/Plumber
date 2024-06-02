@@ -3,6 +3,8 @@ package ui;
 import classes.Direction;
 import classes.Water;
 import classes.entities.water_tanks.Pipe;
+import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
+import classes.entities.water_tanks.water_tanks_ends.MaterialWaterTankEnd;
 import classes.events.PipeActionEvent;
 import classes.events.PipeActionListener;
 import classes.events.WaterTankActionEvent;
@@ -43,36 +45,43 @@ public class PipeWidget extends CellItemWidget {
 
     @Override
     protected BufferedImage getImage() {
-        ArrayList<Direction> possibleDirections = _pipe.getPossibleDirections();
+        ArrayList<Direction> endsDirection = new ArrayList<>();
+
+        for (Direction direction : Direction.values()) {
+            if (_pipe.getEnd(direction) != null) {
+                endsDirection.add(direction);
+            }
+        }
+
         Water water = _pipe.getWater();
         BufferedImage image = null;
         if (water != null) {
             image = ImageLoader.loadImage(BASE_FILLED, WIDTH, HEIGHT);
-            if (possibleDirections.contains(Direction.UP)) {
+            if (endsDirection.contains(Direction.UP)) {
                 image = addPicture(image, UP_FILLED);
             }
-            if (possibleDirections.contains(Direction.DOWN)) {
+            if (endsDirection.contains(Direction.DOWN)) {
                 image = addPicture(image, DOWN_FILLED);
             }
-            if (possibleDirections.contains(Direction.LEFT)) {
+            if (endsDirection.contains(Direction.LEFT)) {
                 image = addPicture(image, LEFT_FILLED);
             }
-            if (possibleDirections.contains(Direction.RIGHT)) {
+            if (endsDirection.contains(Direction.RIGHT)) {
                 image = addPicture(image, RIGHT_FILLED);
             }
             
         } else {
             image = ImageLoader.loadImage(BASE_EMPTY, WIDTH, HEIGHT);
-            if (possibleDirections.contains(Direction.UP)) {
+            if (endsDirection.contains(Direction.UP)) {
                 image = addPicture(image, UP_EMPTY);
             }
-            if (possibleDirections.contains(Direction.DOWN)) {
+            if (endsDirection.contains(Direction.DOWN)) {
                 image = addPicture(image, DOWN_EMPTY);
             }
-            if (possibleDirections.contains(Direction.LEFT)) {
+            if (endsDirection.contains(Direction.LEFT)) {
                 image = addPicture(image, LEFT_EMPTY);
             }
-            if (possibleDirections.contains(Direction.RIGHT)) {
+            if (endsDirection.contains(Direction.RIGHT)) {
                 image = addPicture(image, RIGHT_EMPTY);
             }
         }
@@ -104,6 +113,25 @@ public class PipeWidget extends CellItemWidget {
             fireRotateEvent();
             repaint();
         }
+
+        @Override
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+            printPipeInfo();
+        }
+    }
+
+    private void printPipeInfo() {
+       
+        int x = (int) getCellWidget().getCell().getCoords().getX();
+        int y = (int) getCellWidget().getCell().getCoords().getY();
+
+        String isWaterIn = _pipe.getWater() != null ? "true" : "false";
+        String endsInfo = "";
+        for (AbstractWaterTankEnd end : _pipe.getEnds()) {  
+           endsInfo += end.toString() + "; ";
+        }
+
+        System.out.println("{x: " + x + "; y: " + y + "; isWater: " + isWaterIn + "; " + endsInfo + "}");
     }
 
     private class PipeListener implements PipeActionListener {
