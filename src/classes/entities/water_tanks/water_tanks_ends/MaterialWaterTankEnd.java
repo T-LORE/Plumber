@@ -42,6 +42,13 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        String toString = super.toString();
+        return toString + ": " +_material.toString();
+    }
+
     public void setMaterial(MaterialNode material) {
         _material = material;
     }
