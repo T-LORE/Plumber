@@ -1,8 +1,8 @@
 5 5
 pd□□□
-pppp□
-□ppp□
-□ppp□
+p□pp□
+fppp□
+fppp□
 □s□□□
 METAL;1;1;1;1
 METAL;1;1;1;1
@@ -16,4 +16,5 @@ METAL;1;1;1;1
 METAL;1;1;1;1
 METAL;1;1;1;1
 METAL;1;1;1;1
-METAL;1;1;1;1
+UNIVERSAL;METAL;PLASTIC;METAL;null
+UNIVERSAL;METAL;METAL;PLASTIC;PLASTIC

@@ -210,7 +210,7 @@ public class AbstractWaterTank extends Entity {
             throw new IllegalArgumentException("Invalid tank configuration: " + config);
         }
 
-        MaterialNode pipeMaterial = materialRoot.getChildMaterial(MaterialType.valueOf(configParts[0]));
+        MaterialNode pipeMaterial = MaterialNode.getMaterial(MaterialType.valueOf(configParts[0]));
         if (pipeMaterial == null) {
             throw new IllegalArgumentException("Invalid material: " + configParts[0]);
         }
@@ -223,11 +223,11 @@ public class AbstractWaterTank extends Entity {
                 continue;
             }
             
-            MaterialNode outsideMaterial = materialRoot.getChildMaterial(MaterialType.valueOf(configParts[i]));
-            if (outsideMaterial == null) {
-                throw new IllegalArgumentException("Invalid end material: " + configParts[i]);
+            MaterialNode material = MaterialNode.getMaterial(MaterialType.valueOf(configParts[i]));
+            if (material == null) {
+                throw new IllegalArgumentException("Invalid material: " + configParts[i]);
             }
-            addEnd(new MaterialWaterTankEnd(Direction.values()[i - 1], outsideMaterial));
+            addEnd(new MaterialWaterTankEnd(Direction.values()[i - 1], material));
         }
     }
  

@@ -6,8 +6,10 @@ import java.util.ArrayList;
 public class MaterialNode {
     private MaterialNode _parent;
     private ArrayList<MaterialNode> _childrens = new ArrayList<MaterialNode>();
+    private static MaterialNode _root = new MaterialNode(MaterialType.UNIVERSAL);
+
     public enum MaterialType {
-        ROOT, METAL, PLASTIC, STEEL, CARBON_STEEL, STAINLESS_STEEL, ALLOY_STEEL
+        UNIVERSAL, METAL, PLASTIC, STEEL, CARBON_STEEL, STAINLESS_STEEL, ALLOY_STEEL
     }
     private MaterialType _materialType;
     public MaterialNode(MaterialType materialType) {
@@ -44,7 +46,15 @@ public class MaterialNode {
         _materialType = materialType;
     }
 
-    public MaterialNode getChildMaterial(MaterialType materialType) {
+    public static MaterialNode getMaterial(MaterialType materialType) {
+        return _root.getChildMaterial(materialType);
+    }
+
+    private MaterialNode getChildMaterial(MaterialType materialType) {
+        if (_materialType == materialType) {
+            return this;
+        }
+        
         for (MaterialNode child : _childrens) {
             if (child.getMaterialType() == materialType) {
                 return child;
@@ -101,9 +111,6 @@ public class MaterialNode {
         "  ]\n" +
         "}";
 
-        MaterialNode root = new MaterialNode(MaterialType.ROOT);
-
-        // Вручную построй дерево без парсинга
         MaterialNode metal = new MaterialNode(MaterialType.METAL);
         MaterialNode plastic = new MaterialNode(MaterialType.PLASTIC);
         MaterialNode steel = new MaterialNode(MaterialType.STEEL);
@@ -111,20 +118,23 @@ public class MaterialNode {
         MaterialNode stainlessSteel = new MaterialNode(MaterialType.STAINLESS_STEEL);
         MaterialNode alloySteel = new MaterialNode(MaterialType.ALLOY_STEEL);
 
-        root.addChild(metal);
-        root.addChild(plastic);
+        _root.addChild(metal);
+        _root.addChild(plastic);
 
         metal.addChild(steel);
         steel.addChild(carbonSteel);
         carbonSteel.addChild(stainlessSteel);
         steel.addChild(alloySteel);
 
-        return root;
+        return _root;
     }
 
     @Override
     public String toString() {
         return _materialType.toString();
     }
-        
+    
+    public static MaterialNode getRoot() {
+        return _root;
+    }
 }

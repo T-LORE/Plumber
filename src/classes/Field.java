@@ -2,6 +2,7 @@ package classes;
 
 import classes.entities.Entity;
 import classes.entities.water_tanks.Drain;
+import classes.entities.water_tanks.Fitting;
 import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.Source;
 
@@ -19,6 +20,7 @@ public class Field {
 
     private ArrayList<ArrayList<Cell>> _cells = new ArrayList<ArrayList<Cell>>();
     private ArrayList<Pipe> _pipes = new ArrayList<Pipe>();
+    private ArrayList<Fitting> _fittings = new ArrayList<Fitting>();
     private Source _source;
     private Drain _drain;
     
@@ -104,6 +106,7 @@ public class Field {
             throw new IllegalArgumentException("Invalid field dimensions (min: 2x2, max: 15x7): " + height + " " + width);
         }
 
+        //TODO: to separate method configureField
         Field field = new Field(height, width);
         for (int i = 0; i < height ; i++) {
             String[] cells = reader.readLine().split("");
@@ -111,7 +114,6 @@ public class Field {
                 configurateCell(cells[j], field, new Point(j, i));
             }
         }
-
         
         if (field.getSource() == null) {
             reader.close();
@@ -122,16 +124,23 @@ public class Field {
             throw new IllegalArgumentException("No drain in the field");
         }
 
-
+        //TODO: to separate method configureElements
         MaterialNode root = MaterialNode.configure();
         field.getSource().configureTankWithOneMaterial(reader.readLine(), root);
         field.getDrain().configureTankWithOneMaterial(reader.readLine(), root);
         for (Pipe pipe : field.getPipes()) {
             pipe.configureTankWithOneMaterial(reader.readLine(), root);
         }
+        for (Fitting fitting : field.getFittings()) {
+            fitting.configureTankEndsToMaterial(reader.readLine(), root);
+        }
         reader.close();
 
         return field;
+    }
+
+    public ArrayList<Fitting> getFittings() {
+        return _fittings;
     }
 
     private static void configurateCell(String cell, Field field, Point coords) {
@@ -147,6 +156,9 @@ public class Field {
             case "p":
                 field.addSimplePipe(coords);
                 break;
+                case "f":
+                field.addSimpleFitting(coords);
+                break;
             default:
                 throw new IllegalArgumentException("Invalid cell type: " + cell);
         }
@@ -159,6 +171,13 @@ public class Field {
         }
         cell.setEntity(entity);
         return true;
+    }
+
+    public void addSimpleFitting(Point coords) {
+        Fitting fitting = new Fitting();
+        if (addCellItem(coords, fitting)) {
+            _fittings.add(fitting);
+        }
     }
 
     public void addSimplePipe(Point coords) {
