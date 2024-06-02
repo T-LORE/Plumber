@@ -30,4 +30,9 @@ public abstract class AbstractWaterTankEnd {
         return _parentWaterTank;
     }
 
+    @Override
+    public String toString() {
+        return _direction.toString();
+    }
+
 }
