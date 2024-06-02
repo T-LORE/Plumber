@@ -44,6 +44,15 @@ public class MaterialNode {
         _materialType = materialType;
     }
 
+    public MaterialNode getChildMaterial(MaterialType materialType) {
+        for (MaterialNode child : _childrens) {
+            if (child.getMaterialType() == materialType) {
+                return child;
+            }
+        }
+        return null;
+    }
+
     public boolean isThisMyAncestor(MaterialNode ancestor) {
         if (_parent == null) {
             return false;
