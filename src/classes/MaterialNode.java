@@ -88,30 +88,6 @@ public class MaterialNode {
     }
 
     public static MaterialNode configure() {
-        String jsonString = "{\n" +
-        "  \"материалы\": [\n" +
-        "    {\n" +
-        "      \"металл\": [\n" +
-        "        {\n" +
-        "          \"сталь\": [\n" +
-        "            {\n" +
-        "              \"углеродистая сталь\": {\n" +
-        "                \"нержавейка\": []\n" +
-        "              }\n" +
-        "            },\n" +
-        "            {\n" +
-        "              \"легированная сталь\": []\n" +
-        "            }\n" +
-        "          ]\n" +
-        "        }\n" +
-        "      ]\n" +
-        "    },\n" +
-        "    {\n" +
-        "      \"пластик\": []\n" +
-        "    }\n" +
-        "  ]\n" +
-        "}";
-
         MaterialNode metal = new MaterialNode(MaterialType.METAL);
         MaterialNode plastic = new MaterialNode(MaterialType.PLASTIC);
         MaterialNode steel = new MaterialNode(MaterialType.STEEL);
