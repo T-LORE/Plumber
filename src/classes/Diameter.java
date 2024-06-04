@@ -4,6 +4,9 @@ public class Diameter {
     private int _value;
 
     public Diameter(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Diameter value cannot be negative");
+        }
         _value = value;
     }
 
@@ -12,7 +15,7 @@ public class Diameter {
     }
 
     public boolean isCompatible(Diameter diameter) {
-        return diameter.getValue() == _value;
+        return diameter.getValue() == _value || diameter.getValue() == 0 || _value == 0;
     }
 
     @Override

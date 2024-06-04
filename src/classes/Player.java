@@ -31,6 +31,8 @@ public class Player {
     }
 
     public void startWaterFlow() {
+        if (!_isActive)
+            return;
         fireStartWaterFlowEvent();
     }
 

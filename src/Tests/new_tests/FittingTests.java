@@ -1,10 +1,12 @@
-package Tests;
+package Tests.new_tests;
 import classes.Diameter;
 import classes.Direction;
 import classes.Field;
 import classes.MaterialNode;
 import classes.Water;
+import classes.MaterialNode.MaterialType;
 import classes.entities.water_tanks.AbstractWaterTank;
+import classes.entities.water_tanks.Fitting;
 import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.Source;
 import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
@@ -24,83 +26,131 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static java.lang.Thread.sleep;
 
-public class PipeTests {
-    Pipe _pipe;
+public class FittingTests {
+    Fitting _fitting;
     @BeforeEach
     public void setUp() {
         MaterialNode.configure();
-        _pipe = new Pipe();
-        _pipe.setMaterial(MaterialNode.getRoot());
-        _pipe.setDiameter(new Diameter(10));
+        _fitting = new Fitting();
         Water.setWaterDelay(1);
     }
 
     @Test
-    public void testAddEnd() {
-        MaterialWaterTankEnd expectedEnd = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10));
-        _pipe.addEnd(expectedEnd);
-        assertEquals(1, _pipe.getEnds().size());
-        assertEquals(expectedEnd, _pipe.getEnd(Direction.UP));
+    public void equalMaterialEnds() {
+        MaterialWaterTankEnd end1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(10));
+        MaterialWaterTankEnd end2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(10));
+        _fitting.addEnd(end2);
+        _fitting.addEnd(end1);
+        assertEquals(end1, _fitting.getEnd(Direction.UP));
+        assertEquals(end2, _fitting.getEnd(Direction.DOWN));
     }
 
     @Test
-    public void testAddEnds() {
+    public void differentCompatibleMaterialsEnd() {
+        MaterialWaterTankEnd end1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(10));
+        MaterialWaterTankEnd end2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getMaterial(MaterialType.STEEL), new Diameter(10));
+        _fitting.addEnd(end2);
+        _fitting.addEnd(end1);
+        assertEquals(end1, _fitting.getEnd(Direction.UP));
+        assertEquals(end2, _fitting.getEnd(Direction.DOWN));
+    }
+
+    @Test
+    public void differentNotCompatibleMaterialsEnd() {
+        MaterialWaterTankEnd end1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(10));
+        MaterialWaterTankEnd end2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getMaterial(MaterialType.PLASTIC), new Diameter(10));
+        _fitting.addEnd(end2);
+        _fitting.addEnd(end1);
+        assertEquals(end1, _fitting.getEnd(Direction.UP));
+        assertEquals(end2, _fitting.getEnd(Direction.DOWN));
+    }
+
+    @Test
+    public void equalDiameterEnds() {
+        MaterialWaterTankEnd end1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(10));
+        MaterialWaterTankEnd end2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(10));
+        _fitting.addEnd(end2);
+        _fitting.addEnd(end1);
+        assertEquals(end1, _fitting.getEnd(Direction.UP));
+        assertEquals(end2, _fitting.getEnd(Direction.DOWN));
+    }
+
+    @Test
+    public void differentDiameterEnds() {
+        MaterialWaterTankEnd end1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(10));
+        MaterialWaterTankEnd end2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getMaterial(MaterialType.METAL), new Diameter(20));
+        _fitting.addEnd(end2);
+        _fitting.addEnd(end1);
+        assertEquals(end1, _fitting.getEnd(Direction.UP));
+        assertEquals(end2, _fitting.getEnd(Direction.DOWN));
+    }
+
+    @Test
+    public void testAddEndToFitting() {
+        MaterialWaterTankEnd expectedEnd = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10));
+        _fitting.addEnd(expectedEnd);
+        assertEquals(1, _fitting.getEnds().size());
+        assertEquals(expectedEnd, _fitting.getEnd(Direction.UP));
+    }
+
+    @Test
+    public void testAddEndsToFitting() {
         ArrayList<AbstractWaterTankEnd> ends = new ArrayList<>();
         MaterialWaterTankEnd expectedEnd1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10));
         MaterialWaterTankEnd expectedEnd2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getRoot(), new Diameter(10));
         ends.add(expectedEnd1);
         ends.add(expectedEnd2);
-        _pipe.addEnds(ends);
-        assertEquals(2, _pipe.getEnds().size());
-        assertEquals(expectedEnd1, _pipe.getEnd(Direction.UP));
-        assertEquals(expectedEnd2, _pipe.getEnd(Direction.DOWN));
+        _fitting.addEnds(ends);
+        assertEquals(2, _fitting.getEnds().size());
+        assertEquals(expectedEnd1, _fitting.getEnd(Direction.UP));
+        assertEquals(expectedEnd2, _fitting.getEnd(Direction.DOWN));
     }
 
     @Test
-    public void testRemoveEnd() {
+    public void testRemoveEndFromFitting() {
         MaterialWaterTankEnd expectedEnd = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10));
-        _pipe.addEnd(expectedEnd);
-        _pipe.removeEnd(expectedEnd);
-        assertEquals(0, _pipe.getEnds().size());
-        assertEquals(null, _pipe.getEnd(Direction.UP));
+        _fitting.addEnd(expectedEnd);
+        _fitting.removeEnd(expectedEnd);
+        assertEquals(0, _fitting.getEnds().size());
+        assertEquals(null, _fitting.getEnd(Direction.UP));
     }
 
     @Test
-    public void testRemoveEnds(){
+    public void testRemoveEndsFromFitting(){
         ArrayList<AbstractWaterTankEnd> ends = new ArrayList<>();
         MaterialWaterTankEnd expectedEnd1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10));
         MaterialWaterTankEnd expectedEnd2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getRoot(), new Diameter(10));
         ends.add(expectedEnd1);
         ends.add(expectedEnd2);
-        _pipe.addEnds(ends);
-        _pipe.removeEnds(ends);
-        assertEquals(0, _pipe.getEnds().size());
-        assertEquals(null, _pipe.getEnd(Direction.UP));
-        assertEquals(null, _pipe.getEnd(Direction.DOWN));
-    }
+        _fitting.addEnds(ends);
+        _fitting.removeEnds(ends);
+        assertEquals(0, _fitting.getEnds().size());
+        assertEquals(null, _fitting.getEnd(Direction.UP));
+        assertEquals(null, _fitting.getEnd(Direction.DOWN));
+        }
 
-    @Test
-    public void testClearEnds(){
+        @Test
+        public void testClearEndsOfFitting(){
         MaterialWaterTankEnd expectedEnd1 = new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10));
         MaterialWaterTankEnd expectedEnd2 = new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getRoot(), new Diameter(10));
-        _pipe.addEnd(expectedEnd1);
-        _pipe.addEnd(expectedEnd2);
-        _pipe.clearEnds();
-        assertEquals(0, _pipe.getEnds().size());
-        assertEquals(null, _pipe.getEnd(Direction.UP));
-        assertEquals(null, _pipe.getEnd(Direction.DOWN));
-    }
+        _fitting.addEnd(expectedEnd1);
+        _fitting.addEnd(expectedEnd2);
+        _fitting.clearEnds();
+        assertEquals(0, _fitting.getEnds().size());
+        assertEquals(null, _fitting.getEnd(Direction.UP));
+        assertEquals(null, _fitting.getEnd(Direction.DOWN));
+        }
 
-    @Test
-    public void testGetConnectedFromOneDirection() throws IOException {
+        @Test
+        public void testGetConnectedFromOneDirection() throws IOException {
         String level = "3 3\n" +
-                "sp□\n" +
-                "□p□\n" +
-                "d□□\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n";
+            "sp□\n" +
+            "□p□\n" +
+            "d□□\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n";
 
         String fileName = "test_level.txt";
         try {
@@ -130,19 +180,19 @@ public class PipeTests {
         // delete file
         File file = new File(fileName);
         file.delete();
-    }
+        }
 
-    @Test
-    void getConnectedFromTwoDirections() throws IOException {
+        @Test
+        void testGetConnectedFromTwoDirections() throws IOException {
         String level = "3 3\n" +
-                "sp□\n" +
-                "□p□\n" +
-                "dp□\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n";
+            "sp□\n" +
+            "□p□\n" +
+            "dp□\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -172,20 +222,20 @@ public class PipeTests {
         // delete file
         File file = new File(fileName);
         file.delete();
-    }
+        }
 
-    @Test
-    void getConnectedFromThreeDirections() throws IOException {
+        @Test
+        void testGetConnectedFromThreeDirections() throws IOException {
         String level = "3 3\n" +
-                "sp□\n" +
-                "□pp\n" +
-                "dp□\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n";
+            "sp□\n" +
+            "□pp\n" +
+            "dp□\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -216,21 +266,21 @@ public class PipeTests {
         // delete file
         File file = new File(fileName);
         file.delete();
-    }
+        }
 
-    @Test
-    void getConnectedFromFourDirections() throws IOException {
+        @Test
+        void testGetConnectedFromFourDirections() throws IOException {
         String level = "3 3\n" +
-                "sp□\n" +
-                "ppp\n" +
-                "dp□\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n";
+            "sp□\n" +
+            "ppp\n" +
+            "dp□\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -262,18 +312,18 @@ public class PipeTests {
         // delete file
         File file = new File(fileName);
         file.delete();
-    }
+        }
 
-    @Test
-    void tryToGetConnectedPipesAtTheCorner() throws IOException {
+        @Test
+        void tryToGetConnectedFittingsAtTheCorner() throws IOException {
         String level = "3 3\n" +
-                "s□p\n" +
-                "□□p\n" +
-                "d□□\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n" +
-                "UNIVERSAL;10;1;1;1;1\n";
+            "s□p\n" +
+            "□□p\n" +
+            "d□□\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n" +
+            "UNIVERSAL;10;1;1;1;1\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -303,10 +353,10 @@ public class PipeTests {
         File file = new File(fileName);
         file.delete();
 
-    }
+        }
 
-    @Test
-    void fillFromOneEnd() throws Exception {
+        @Test
+        void fillFromOneEnd() throws Exception {
         String level = "3 3\n" +
                 "sp□\n" +
                 "□□□\n" +
@@ -377,47 +427,40 @@ public class PipeTests {
         Water water1 = new Water(source);
         Water water2 = new Water(source);
 
-        boolean isFilled1 = _pipe.fill(water1);
-        boolean isFilled2 = _pipe.fill(water2);
+        boolean isFilled1 = _fitting.fill(water1);
+        boolean isFilled2 = _fitting.fill(water2);
         assertTrue(isFilled1);
         assertFalse(isFilled2);
 
-        assertEquals(water1, _pipe.getWater());
+        assertEquals(water1, _fitting.getWater());
     }
 
-    @Test
-    public void testToString() {
-        _pipe.configureTankWithOneMaterial("UNIVERSAL;10;0;1;1;1", MaterialNode.getRoot());
-        assertEquals("╦", _pipe.toString());
-    }
-    
     @Test
     public void testRotateClockwise() {
-        _pipe.addEnd(new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10)));
-        _pipe.addEnd(new MaterialWaterTankEnd(Direction.RIGHT, MaterialNode.getRoot(), new Diameter(10)));
+        _fitting.addEnd(new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10)));
+        _fitting.addEnd(new MaterialWaterTankEnd(Direction.RIGHT, MaterialNode.getRoot(), new Diameter(10)));
         
-        _pipe.rotateClockwise();
+        _fitting.rotateClockwise();
 
-        assertNull(_pipe.getEnd(Direction.UP));
-        assertNotNull(_pipe.getEnd(Direction.DOWN));
-        assertNotNull(_pipe.getEnd(Direction.RIGHT));
+        assertNull(_fitting.getEnd(Direction.UP));
+        assertNotNull(_fitting.getEnd(Direction.DOWN));
+        assertNotNull(_fitting.getEnd(Direction.RIGHT));
     }
 
     @Test
     void zeroEndsRotationClockwise() {
-        _pipe.rotateClockwise();
-        assertEquals(0, _pipe.getEnds().size());
+        _fitting.rotateClockwise();
+        assertEquals(0, _fitting.getEnds().size());
     }
 
     void allEndsPossible() {
-        _pipe.addEnd(new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10)));
-        _pipe.addEnd(new MaterialWaterTankEnd(Direction.RIGHT, MaterialNode.getRoot(), new Diameter(10)));
-        _pipe.addEnd(new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getRoot(), new Diameter(10)));
-        _pipe.addEnd(new MaterialWaterTankEnd(Direction.LEFT, MaterialNode.getRoot(), new Diameter(10)));
+        _fitting.addEnd(new MaterialWaterTankEnd(Direction.UP, MaterialNode.getRoot(), new Diameter(10)));
+        _fitting.addEnd(new MaterialWaterTankEnd(Direction.RIGHT, MaterialNode.getRoot(), new Diameter(10)));
+        _fitting.addEnd(new MaterialWaterTankEnd(Direction.DOWN, MaterialNode.getRoot(), new Diameter(10)));
+        _fitting.addEnd(new MaterialWaterTankEnd(Direction.LEFT, MaterialNode.getRoot(), new Diameter(10)));
 
-        _pipe.rotateClockwise();
+        _fitting.rotateClockwise();
 
-        assertEquals(4, _pipe.getEnds().size());
+        assertEquals(4, _fitting.getEnds().size());
     }
-    
 }

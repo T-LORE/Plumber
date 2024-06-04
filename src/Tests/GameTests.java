@@ -3,7 +3,8 @@ package Tests;
 import classes.Direction;
 
 import classes.Game;
-
+import classes.Water;
+import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
 import classes.events.GameActionEvent;
 import classes.events.GameActionListener;
 
@@ -51,6 +52,7 @@ public class GameTests {
         _game = new Game();
         _mockGameActionListener = new MockGameActionListener();
         _game.addListener(_mockGameActionListener);
+        Water.setWaterDelay(1);
     }
 
     private void loadLevel (String level) throws Exception {
@@ -64,38 +66,52 @@ public class GameTests {
             fail("Failed to create test file");
         }
 
-        //_mockUserInputHandler.simulateLoadLevelEvent(fileName);
+        _game.getPlayer().startLevel(fileName);
 
         // delete file
         File file = new File(fileName);
         file.delete();
     }
 
+    private void startWaterFlow() {
+        _game.getPlayer().startWaterFlow();
+    }
+
     @Test
     void testWinEvent() throws Exception {
         String level = "3 3\n" +
                 "s□□\n" +
-                "║□□\n" +
-                "╚═d\n";
+                "p□□\n" +
+                "ppd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;1;0;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
         loadLevel(level);
-
-        //_mockUserInputHandler.simulateStartFlowEvent();
-        sleep(1000);
+        startWaterFlow();
+        
+        sleep(100);
         assertEquals(true, _mockGameActionListener.winEventCalled);
     }
 
     @Test
     void testLoseEvent() throws Exception {
         String level = "3 3\n" +
-                "s□□\n" +
-                "║□□\n" +
-                "□□d\n";
+        "s□□\n" +
+        "p□□\n" +
+        "ppd\n" +
+        "UNIVERSAL;10;0;0;1;0\n" +
+        "UNIVERSAL;10;0;0;0;1\n" +
+        "UNIVERSAL;10;1;0;1;0\n" +
+        "UNIVERSAL;10;1;1;0;0\n" +
+        "UNIVERSAL;10;0;0;0;0\n";
 
         loadLevel(level);
 
-        //_mockUserInputHandler.simulateStartFlowEvent();
-        sleep(1000);
+        startWaterFlow();
+        sleep(100);
         assertEquals(true, _mockGameActionListener.loseEventCalled);
     }
 
@@ -103,23 +119,23 @@ public class GameTests {
     void rotateClockwiseTest() throws Exception {
         String level = "3 3\n" +
                 "s□□\n" +
-                "║□□\n" +
-                "□□d\n";
+                "p□□\n" +
+                "□□d\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;1;0;0\n" +
+                "UNIVERSAL;10;1;0;1;0\n";
 
         loadLevel(level);
 
-        //_mockUserInputHandler.simulateRotateClockwiseEvent(new Point(0, 1));
+        _game.getPlayer().rotateClockwise(new Point(0,1));
         ArrayList<Direction> expectedDirs = new ArrayList<Direction>();
         expectedDirs.add(Direction.LEFT);
         expectedDirs.add(Direction.RIGHT);
-        //ArrayList<Direction> actualDirs = _game.getField().getPipeOnCords(new Point(0, 1)).getPossibleDirections();
-//        for (Direction dir : expectedDirs) {
-//            assertEquals(true, actualDirs.contains(dir));
-//        }
+        ArrayList <AbstractWaterTankEnd> ends = _game.getField().getPipeOnCords( new Point(0,1)).getEnds();
+        for (AbstractWaterTankEnd end : ends) {
+            assertEquals(true, expectedDirs.contains(end.getDirection()));
+        }
 
-//        for (Direction dir : actualDirs) {
-//            assertEquals(true, expectedDirs.contains(dir));
-//        }
 
     }
 

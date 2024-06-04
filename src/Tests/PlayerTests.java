@@ -1,6 +1,9 @@
 package Tests;
 
 import classes.Player;
+import classes.events.PlayerActionEvent;
+import classes.events.PlayerActionListener;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
@@ -9,34 +12,72 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTests {
 
     private Player _player;
+    MockPlayerListener _mockPlayerActionListener = new MockPlayerListener();
 
     @BeforeEach
     void setUp() {
-//        _mockInputHandler = new MockUserInputHandler();
-//        _player = new Player(_mockInputHandler);
-//        _mockPlayerActionListener = new MockPlayerActionListener();
-//        _player.addListener(_mockPlayerActionListener);
+        _player = new Player();
+        _player.addListener(_mockPlayerActionListener);
     }
 
     @Test
-    void testRotateClockwiseBeforeLevelStart() {
-//        _mockInputHandler.simulateRotateClockwiseEvent(new Point(1, 5));
-//        assertNull(_mockPlayerActionListener.getReceivedEvent());
+    void testRotateWhenNotActive() {
+        _player.rotateClockwise(new Point(1, 5));
+        assertFalse(_mockPlayerActionListener.isRotateClockwiseEventReceived);
     }
 
     @Test
-    void testRotateClockwiseAfterLevelStart() throws Exception {
-//        _mockInputHandler.simulateLoadLevelEvent("test_level.txt");
-//        _mockInputHandler.simulateRotateClockwiseEvent(new Point(1, 5));
-//        assertEquals(new Point(1, 5), _mockPlayerActionListener.getReceivedEvent().cords);
+    void testRotateClockwiseWhenActive() {
+        _player.setActive(true);
+        _player.rotateClockwise(new Point(1, 5));
+        assertTrue(_mockPlayerActionListener.isRotateClockwiseEventReceived);
+        assertEquals(new Point(1, 5), _mockPlayerActionListener.receivedEvent.cords);
     }
 
     @Test
-    void testRotateClockwiseWhenWaterFlow() throws Exception {
-//        _mockInputHandler.simulateLoadLevelEvent("test_level.txt");
-//        _mockInputHandler.simulateStartFlowEvent();
-//        _mockInputHandler.simulateRotateClockwiseEvent(new Point(1, 5));
-//        assertNull(_mockPlayerActionListener.getReceivedEvent());
+    void testStartFlowWhenNotActive() {
+        _player.startWaterFlow();
+        assertFalse(_mockPlayerActionListener.isStartFlowEventReceived);
+    }
+
+    @Test
+    void testStartFlowWhenActive() {
+        _player.setActive(true);
+        _player.startWaterFlow();
+        assertTrue(_mockPlayerActionListener.isStartFlowEventReceived);
+    }
+
+    @Test
+    void testStartLevel() {
+        _player.startLevel("levelpath");
+        assertTrue(_mockPlayerActionListener.isStartLevelEventReceived);
+        assertEquals("levelpath", _mockPlayerActionListener.receivedEvent.levelPath);
+    }
+
+    private class MockPlayerListener implements PlayerActionListener {
+        public boolean isRotateClockwiseEventReceived = false;
+        public boolean isStartFlowEventReceived = false;
+        public boolean isStartLevelEventReceived = false;
+
+        PlayerActionEvent receivedEvent;
+        @Override
+        public void rotateClockwise(PlayerActionEvent event) {
+            isRotateClockwiseEventReceived = true;
+            receivedEvent = event;
+        }
+
+        @Override
+        public void startFlow(PlayerActionEvent event) {
+            isStartFlowEventReceived = true;
+            receivedEvent = event;
+        }
+
+        @Override
+        public void startLevel(PlayerActionEvent event) {
+            isStartLevelEventReceived = true;
+            receivedEvent = event;
+        }
+  
     }
 
 }

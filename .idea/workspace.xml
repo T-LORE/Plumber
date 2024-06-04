@@ -5,20 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f09ae5a-fca1-4360-9de9-b9132dd4e8de" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Sprites/pipes/pipe_up_empty.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sprites/pipes/pipe_up_empty.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/withMaterials.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/withMaterials.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/AbstractWaterTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/AbstractWaterTank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/DiameterTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/FittingTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/MaterialEndTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/MaterialNodeTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/123.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/123.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/AbstractWaterTankTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DrainTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DrainTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/FieldTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/FieldTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/GameTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/GameTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/PipeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PipeTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/PlayerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PlayerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/WaterTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/WaterTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Diameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Diameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MaterialNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MaterialNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Water.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Water.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/Fitting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/Fitting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/water_tanks_ends/MaterialWaterTankEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/water_tanks_ends/MaterialWaterTankEnd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CellItemWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CellItemWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/CellWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CellWidget.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/DrainWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/DrainWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/FieldWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/FieldWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ImageLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/PipeWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/PipeWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/SourceWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/SourceWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/WidgetFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WidgetFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +55,50 @@
     "Application.Main.executor": "Run",
     "Application.Run.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.TestAll.executor": "Coverage",
+    "JUnit.DiameterTests.executor": "Run",
+    "JUnit.DrainTests.executor": "Run",
+    "JUnit.FieldTests.executor": "Run",
+    "JUnit.FieldTests.testComplexLoadFromFile.executor": "Run",
+    "JUnit.FieldTests.testSourceLoadFromFile.executor": "Run",
+    "JUnit.FieldTests.veryBigFieldLoadFromFile.executor": "Run",
+    "JUnit.FittingTests.equalMaterialEnds.executor": "Run",
+    "JUnit.FittingTests.executor": "Run",
+    "JUnit.GameTests.executor": "Run",
+    "JUnit.GameTests.rotateClockwiseTest.executor": "Run",
+    "JUnit.GameTests.testLoseEvent.executor": "Run",
+    "JUnit.GameTests.testWinEvent.executor": "Run",
+    "JUnit.MaterialEndTests.executor": "Run",
+    "JUnit.MaterialNodeTests.executor": "Run",
+    "JUnit.MaterialNodeTests.notEqualButCompatibleFirstParent.executor": "Debug",
+    "JUnit.MaterialNodeTests.notEqualButCompatibleSecondParent.executor": "Debug",
+    "JUnit.PipeTests.doubleFilled.executor": "Run",
+    "JUnit.PipeTests.executor": "Run",
+    "JUnit.PipeTests.fillFromNotAnEnd.executor": "Run",
+    "JUnit.PipeTests.fillFromOneEnd.executor": "Run",
+    "JUnit.PipeTests.getConnectedFromFourDirections.executor": "Run",
+    "JUnit.PipeTests.getConnectedFromThreeDirections.executor": "Run",
+    "JUnit.PipeTests.getConnectedFromTwoDirections.executor": "Run",
+    "JUnit.PipeTests.testAddEnd.executor": "Run",
+    "JUnit.PipeTests.testAddEnds.executor": "Run",
+    "JUnit.PipeTests.testGetConnectedFromOneDirection.executor": "Run",
+    "JUnit.PipeTests.testRemoveEnd.executor": "Run",
+    "JUnit.PipeTests.testRemoveEnds.executor": "Run",
+    "JUnit.PipeTests.testRotateClockwise.executor": "Run",
+    "JUnit.PipeTests.testToString.executor": "Run",
+    "JUnit.PipeTests.tryToGetConnectedPipesAtTheCorner.executor": "Run",
+    "JUnit.PipeTests.zeroEndsRotationClockwise.executor": "Run",
+    "JUnit.PlayerTests.executor": "Run",
+    "JUnit.PlayerTests.testRotateClockwiseBeforeLevelStart.executor": "Run",
+    "JUnit.PlayerTests.testRotateClockwiseWhenActive.executor": "Run",
+    "JUnit.SourceTests.executor": "Run",
+    "JUnit.SourceTests.testCreateWater.executor": "Run",
+    "JUnit.TestAll.executor": "Run",
+    "JUnit.WaterTests.connectedWithTheRndOfField.executor": "Run",
+    "JUnit.WaterTests.executor": "Run",
+    "JUnit.WaterTests.noConnectedPipe.executor": "Run",
+    "JUnit.WaterTests.stepEndEventTest.executor": "Run",
+    "JUnit.WaterTests.stepEndEventWithForkTest.executor": "Run",
+    "JUnit.WaterTests.waterEndFlowEventTest.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -65,10 +113,87 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="JUnit.TestAll">
     <configuration name="Run" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Plumber" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FittingTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Plumber" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.new_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests.new_tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.new_tests.FittingTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FittingTests.equalMaterialEnds" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Plumber" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.new_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests.new_tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.new_tests.FittingTests" />
+      <option name="METHOD_NAME" value="equalMaterialEnds" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MaterialEndTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Plumber" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.new_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests.new_tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.new_tests.MaterialEndTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MaterialNodeTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Plumber" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.new_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests.new_tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.new_tests.MaterialNodeTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MaterialNodeTests.notEqualButCompatibleSecondParent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Plumber" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.new_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests.new_tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.new_tests.MaterialNodeTests" />
+      <option name="METHOD_NAME" value="notEqualButCompatibleSecondParent" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -86,7 +211,21 @@
     <list>
       <item itemvalue="Application.Run" />
       <item itemvalue="JUnit.TestAll" />
+      <item itemvalue="JUnit.FittingTests" />
+      <item itemvalue="JUnit.FittingTests.equalMaterialEnds" />
+      <item itemvalue="JUnit.MaterialEndTests" />
+      <item itemvalue="JUnit.MaterialNodeTests" />
+      <item itemvalue="JUnit.MaterialNodeTests.notEqualButCompatibleSecondParent" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MaterialEndTests" />
+        <item itemvalue="JUnit.FittingTests" />
+        <item itemvalue="JUnit.FittingTests.equalMaterialEnds" />
+        <item itemvalue="JUnit.MaterialNodeTests" />
+        <item itemvalue="JUnit.MaterialNodeTests.notEqualButCompatibleSecondParent" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -112,18 +251,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Tests/FieldTests.java</url>
-          <line>111</line>
+          <line>117</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Tests/WaterTests.java</url>
-          <line>201</line>
+          <line>237</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ui/FieldWidget.java</url>
           <line>31</line>
           <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tests/new_tests/MaterialNodeTests.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -6,6 +6,7 @@ import classes.entities.water_tanks.Source;
 
 import classes.events.WaterActionEvent;
 import classes.events.WaterActionListener;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -42,18 +43,24 @@ public class WaterTests {
         return field;
     }
 
+    @BeforeEach
+    void setUp() {
+        Water.setWaterDelay(1);
+    }
+
     @Test
     void sourceAndDrainConnected() throws IOException, InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
                 "d□□\n" +
-                "□□□\n";
+                "□□□\n" +
+                "UNIVERSAL;10;1;1;1;1\n" +
+                "UNIVERSAL;10;1;1;1;1\n";
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         water.flow();
         sleep(10);
         assertEquals(water, _field.getDrain().getWater());
@@ -64,13 +71,14 @@ public class WaterTests {
         String level = "3 3\n" +
                 "s□□\n" +
                 "□□□\n" +
-                "□□d\n";
+                "□□d\n" +
+                "UNIVERSAL;10;1;1;1;1\n" +
+                "UNIVERSAL;10;1;1;1;1\n";
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         water.flow();
         sleep(100);
         assertEquals(null, _field.getDrain().getWater());
@@ -81,14 +89,18 @@ public class WaterTests {
     void sourceAndDrainConnectedWithPipe() throws IOException, InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
-                "║□□\n" +
-                "╚═d\n";
+                "p□□\n" +
+                "ppd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;1;0;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         water.flow();
         sleep(10);
         assertEquals(water, _field.getDrain().getWater());
@@ -101,14 +113,20 @@ public class WaterTests {
     void waterFork() throws IOException, InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
-                "╠═╗\n" +
-                "╚═d\n";
+                "ppp\n" +
+                "ppd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;1;1;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n" +
+                "UNIVERSAL;10;0;0;1;1\n" +
+                "UNIVERSAL;10;1;1;0;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         water.flow();
         sleep(10);
         assertEquals(water, _field.getDrain().getWater());
@@ -123,14 +141,18 @@ public class WaterTests {
     void noConnectedPipe() throws IOException, InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
-                "╠□╝\n" +
-                "□╝d\n";
+                "p□p\n" +
+                "□pd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;0;0;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         water.flow();
         sleep(10);
         assertEquals(null, _field.getDrain().getWater());
@@ -143,14 +165,18 @@ public class WaterTests {
     void connectedWithTheRndOfField() throws IOException, InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
-                "╩□╝\n" +
-                "□╝d\n";
+                "p□p\n" +
+                "□pd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;1;0;1\n" +
+                "UNIVERSAL;10;0;1;0;1\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         water.flow();
         sleep(10);
         assertEquals(null, _field.getDrain().getWater());
@@ -163,8 +189,13 @@ public class WaterTests {
     void waterEndFlowEventTest() throws InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
-                "║□□\n" +
-                "╚═d\n";
+                "p□□\n" +
+                "ppd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;1;0;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
         try {
             _field = prepareField(level);
@@ -174,7 +205,6 @@ public class WaterTests {
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         MockWaterListener listener = new MockWaterListener();
         water.addListener(listener);
         water.flow();
@@ -186,15 +216,21 @@ public class WaterTests {
     void stepEndEventWithForkTest() throws IOException, InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
-                "╬╦╦\n" +
-                "╚═d\n";
+                "ppp\n" +
+                "ppd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;1;1;1\n" +
+                "UNIVERSAL;10;0;1;1;1\n" +
+                "UNIVERSAL;10;0;1;1;1\n" +
+                "UNIVERSAL;10;1;1;0;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         MockWaterListener listener = new MockWaterListener();
         water.addListener(listener);
         water.flow();
@@ -206,15 +242,19 @@ public class WaterTests {
     void stepEndEventTest() throws IOException, InterruptedException {
         String level = "3 3\n" +
                 "s□□\n" +
-                "║□□\n" +
-                "╚═d\n";
+                "p□□\n" +
+                "ppd\n" +
+                "UNIVERSAL;10;0;0;1;0\n" +
+                "UNIVERSAL;10;0;0;0;1\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;1;0;0\n" +
+                "UNIVERSAL;10;0;1;0;1\n";
 
 
         _field = prepareField(level);
 
         Source src = _field.getSource();
         Water water = src.createWater();
-        water.setWaterDelay(1);
         MockWaterListener listener = new MockWaterListener();
         water.addListener(listener);
         water.flow();

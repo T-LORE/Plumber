@@ -3,6 +3,8 @@ import classes.Cell;
 import classes.Direction;
 import classes.Field;
 import classes.entities.water_tanks.Source;
+import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
+import classes.entities.water_tanks.AbstractWaterTank;
 import classes.entities.water_tanks.Drain;
 import classes.entities.water_tanks.Pipe;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +38,9 @@ public class FieldTests {
         String level = "3 3\n" +
                 "s□□\n" +
                 "□□□\n" +
-                "d□□\n";
+                "d□□\n" +
+                "UNIVERSAL;10;1;1;1;1\n" +
+                "UNIVERSAL;10;1;1;1;1\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -68,7 +72,9 @@ public class FieldTests {
         String level = "3 3\n" +
                 "s□□\n" +
                 "□□□\n" +
-                "d□□\n";
+                "d□□\n" +
+                "UNIVERSAL;10;1;1;1;1\n" +
+                "UNIVERSAL;10;1;1;1;1\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -211,33 +217,13 @@ public class FieldTests {
         }
 
         // load from file
-        Field field = Field.loadFromFile(fileName);
-        assertNotNull(field);
-        assertEquals(ySize, field.getHeight());
-        assertEquals(xSize, field.getWidth());
 
-        //check every cell
-        Source source = field.getSource();
-        assertNotNull(source);
-        assertEquals(new Point(0, 0), source.getCell().getCoords());
-
-        Drain drain = field.getDrain();
-        assertNotNull(drain);
-        assertEquals(new Point(1, 0), drain.getCell().getCoords());
-
-        for (int j = 2; j < xSize; j++) {
-            Cell cell = field.getCell(new Point(0, j));
-            assertNotNull(cell);
-            assertNull(cell.getEntity());
+        try {
+            Field field = Field.loadFromFile(fileName);
+            fail("Should throw exception");
+        } catch (IllegalArgumentException e) {
+            
         }
-        for (int y = 1; y < ySize-1; y++) {
-            for (int x = 0; x < xSize; x++) {
-                Cell cell = field.getCell(new Point(x, y));
-                assertNotNull(cell);
-                assertNull(cell.getEntity());
-            }
-        }
-
         // delete file
         File file = new File(fileName);
         file.delete();
@@ -247,10 +233,16 @@ public class FieldTests {
         // prepare file
         String level = "5 5\n" +
                 "□□d□□\n" +
-                "□╔╣□□\n" +
-                "□║□□□\n" +
-                "□║□□□\n" +
-                "□s□□□\n";
+                "□pp□□\n" +
+                "□p□□□\n" +
+                "□p□□□\n" +
+                "□s□□□\n" +
+                "UNIVERSAL;10;1;1;1;1\n" +
+                "UNIVERSAL;10;1;1;1;1\n" +
+                "UNIVERSAL;10;0;1;1;0\n" +
+                "UNIVERSAL;10;1;0;1;1\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;0;1;0\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -281,18 +273,18 @@ public class FieldTests {
         pipeExpectedDirections.add(Direction.UP);
         pipeExpectedDirections.add(Direction.DOWN);
         pipeExpectedDirections.add(Direction.LEFT);
-        //for (Direction direction : pipe.getPossibleDirections()) {
-        //    assertTrue(pipeExpectedDirections.contains(direction));
-        //}
+        for (Direction direction : getTankDirections(pipe)) {
+           assertTrue(pipeExpectedDirections.contains(direction));
+        }
 
         pipe = field.getPipeOnCords(new Point(1, 1));
         assertNotNull(pipe);
         pipeExpectedDirections = new ArrayList<>();
         pipeExpectedDirections.add(Direction.RIGHT);
         pipeExpectedDirections.add(Direction.DOWN);
-        //for (Direction direction : pipe.getPossibleDirections()) {
-        //    assertTrue(pipeExpectedDirections.contains(direction));
-        //}
+        for (Direction direction : getTankDirections(pipe)) {
+           assertTrue(pipeExpectedDirections.contains(direction));
+        }
 
         
         pipe = field.getPipeOnCords(new Point(1, 2));
@@ -300,18 +292,18 @@ public class FieldTests {
         pipeExpectedDirections = new ArrayList<>();
         pipeExpectedDirections.add(Direction.UP);
         pipeExpectedDirections.add(Direction.DOWN);
-        //for (Direction direction : pipe.getPossibleDirections()) {
-        //    assertTrue(pipeExpectedDirections.contains(direction));
-        //}
+        for (Direction direction : getTankDirections(pipe)) {
+           assertTrue(pipeExpectedDirections.contains(direction));
+        }
 
         pipe = field.getPipeOnCords(new Point(1, 3));
         assertNotNull(pipe);
         pipeExpectedDirections = new ArrayList<>();
         pipeExpectedDirections.add(Direction.UP);
         pipeExpectedDirections.add(Direction.DOWN);
-        //for (Direction direction : pipe.getPossibleDirections()) {
-        //    assertTrue(pipeExpectedDirections.contains(direction));
-        //}
+        for (Direction direction : getTankDirections(pipe)) {
+           assertTrue(pipeExpectedDirections.contains(direction));
+        }
 
         // delete file
         File file = new File(fileName);
@@ -325,7 +317,9 @@ public class FieldTests {
         String level = "3 3\n" +
                 "s□□\n" +
                 "□□□\n" +
-                "s□□\n";
+                "s□□\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;0;1;0\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -355,7 +349,9 @@ public class FieldTests {
         String level = "3 3\n" +
                 "d□□\n" +
                 "□□□\n" +
-                "d□□\n";
+                "d□□\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;0;1;0\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -385,7 +381,9 @@ public class FieldTests {
         String level = "3 3\n" +
                 "□□□\n" +
                 "□□□\n" +
-                "d□□\n";
+                "d□□\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;0;1;0\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -415,7 +413,9 @@ public class FieldTests {
         String level = "3 3\n" +
                 "s□□\n" +
                 "□□□\n" +
-                "□□□\n";
+                "□□□\n" +
+                "UNIVERSAL;10;1;0;1;0\n" +
+                "UNIVERSAL;10;1;0;1;0\n";
         String fileName = "test_level.txt";
         try {
             // write to file
@@ -497,5 +497,12 @@ public class FieldTests {
         assertEquals(expected, _field.toString());
     }
 
+    private ArrayList<Direction> getTankDirections(AbstractWaterTank tank) {
+        ArrayList<Direction> directions = new ArrayList<>();
+        for (AbstractWaterTankEnd end : tank.getEnds()) {
+            directions.add(end.getDirection());
+        }
+        return directions;
+    }
 
 }

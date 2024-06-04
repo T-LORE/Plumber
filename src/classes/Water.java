@@ -21,13 +21,13 @@ public class Water {
     };
 
     private final Timer _timer = new Timer("Flow timer");
-    private int DELAY = 1000;
+    private static int DELAY = 1000;
 
     public ArrayList<HashMap<AbstractWaterTank,Direction>> getAllSteps() {
         return _pastSteps;
     }
 
-    public void setWaterDelay(int delay) {
+    public static void setWaterDelay(int delay) {
         DELAY = delay;
     }
 
@@ -88,4 +88,6 @@ public class Water {
         }
     }
 
+
+    
 }

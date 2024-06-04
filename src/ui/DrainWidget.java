@@ -1,6 +1,6 @@
 package ui;
 
-import static ui.AbstractWaterTankWidget.END_SHIFT_OFFSET;
+
 
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;

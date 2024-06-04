@@ -56,8 +56,9 @@ public class MaterialNode {
         }
         
         for (MaterialNode child : _childrens) {
-            if (child.getMaterialType() == materialType) {
-                return child;
+            MaterialNode material = child.getChildMaterial(materialType);
+            if (material != null ) {
+                return  material;
             }
         }
         return null;
