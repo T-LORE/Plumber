@@ -4,6 +4,7 @@ import classes.Cell;
 import classes.Field;
 import classes.Player;
 import classes.entities.water_tanks.Drain;
+import classes.entities.water_tanks.Fitting;
 import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.Source;
 import classes.entities.water_tanks.AbstractWaterTank;
@@ -46,6 +47,11 @@ public class WidgetFactory {
 
             if (abstractWaterTank instanceof Drain) {
                 waterTanks.put(abstractWaterTank, new DrainWidget((Drain) abstractWaterTank));
+                cellWidget.addItem(waterTanks.get(abstractWaterTank));
+            }
+
+            if (abstractWaterTank instanceof Fitting) {
+                waterTanks.put(abstractWaterTank, new FittingWidget((Fitting) abstractWaterTank));
                 cellWidget.addItem(waterTanks.get(abstractWaterTank));
             }
         }

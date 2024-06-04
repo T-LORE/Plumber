@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f09ae5a-fca1-4360-9de9-b9132dd4e8de" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/Pipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/Pipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/events/PipeActionEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/events/RotatableWaterTankActionEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/events/PipeActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/events/RotatableWaterTankActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sprites/pipes/pipe_up_empty.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sprites/pipes/pipe_up_empty.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/withMaterials.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/withMaterials.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/AbstractWaterTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/AbstractWaterTank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/Fitting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/Fitting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/water_tanks_ends/MaterialWaterTankEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/water_tanks_ends/MaterialWaterTankEnd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CellItemWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CellItemWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CellWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CellWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/DrainWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/DrainWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/FieldWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/FieldWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ImageLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/PipeWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/PipeWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/SourceWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/SourceWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WidgetFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WidgetFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

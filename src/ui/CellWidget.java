@@ -7,17 +7,22 @@ import classes.Cell;
 import java.awt.*;
 
 public class CellWidget extends JPanel {
-    private static final int  CELL_SIZE = 100;
+    private static final int  CELL_SIZE = 128;
     private static final Color BACKGROUND_COLOR = Color.decode("#888888");
 
     private Cell _cell;
     private CellItemWidget _item;
 
+    public static int getCellSize() {
+        return CELL_SIZE;
+    }
+
     public CellWidget(Cell cell) {
         _cell = cell;
         setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
         setBackground(BACKGROUND_COLOR); 
-        setOpaque(false); 
+        setOpaque(false);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); 
         setBorder(BorderFactory.createLineBorder(Color.black));
     }
 

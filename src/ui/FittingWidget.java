@@ -1,42 +1,42 @@
 package ui;
 
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
-import java.awt.image.DirectColorModel;
 
 import classes.Direction;
 import classes.entities.water_tanks.AbstractWaterTank;
-import classes.entities.water_tanks.Source;
-import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
+import classes.entities.water_tanks.Fitting;
+import classes.entities.water_tanks.Pipe;
 import classes.entities.water_tanks.water_tanks_ends.MaterialWaterTankEnd;
 
-public class SourceWidget  extends AbstractWaterTankWidget {
-    
-    private static final String path = "water_tanks/source/";
+public class FittingWidget extends AbstractRotatableWaterTankWidget {
+
     private static final int END_SHIFT_OFFSET = CellWidget.getCellSize() / 64 * 21;
 
-    public SourceWidget(AbstractWaterTank watertank) {
-        super(watertank);
-        
+    public FittingWidget(Fitting fitting) {
+        super(fitting);
     }
+
+    private static final String path = "water_tanks/pipe/";
 
     @Override
     protected BufferedImage getTankTextureBase() {
-        String material = getWaterTank().getMaterial().toString().toLowerCase();
-        String filepath = path + material + "/" + "base.png";
+        String filled = getRotatableWaterTank().getWater() != null ? "filled" : "empty";
+        String filepath = path + "universal/" + "base_" + filled + ".png";
         return ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
     }
 
     @Override
     protected BufferedImage getTankTextureEnd(Direction direction) {
+        String filled = getRotatableWaterTank().getWater() != null ? "filled" : "empty";
+        //TODO: неправильно блять
         String material = ((MaterialWaterTankEnd)getWaterTank().getEnd(direction)).getMaterial().toString().toLowerCase();
         String diameter = getWaterTank().getDiameter().toString().toLowerCase();
-        String filepath = path + material + "/" + "end_" + diameter + ".png";
+        String filepath = path + material + "/" + "end_" + diameter + "_" + filled + ".png";
+        System.out.println(filepath);
         BufferedImage img = ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
         return shiftEndPicture(img, direction);
     }
-
+    
     private BufferedImage shiftEndPicture(BufferedImage image, Direction direction) {
         int x = 0;
         int y = 0;
@@ -59,5 +59,5 @@ public class SourceWidget  extends AbstractWaterTankWidget {
         }
         return ImageLoader.shiftPicture(image, x, y);
     }
-
+    
 }

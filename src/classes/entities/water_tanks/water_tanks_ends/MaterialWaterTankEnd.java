@@ -1,15 +1,18 @@
 package classes.entities.water_tanks.water_tanks_ends;
 
+import classes.Diameter;
 import classes.Direction;
 import classes.MaterialNode;
 import classes.entities.water_tanks.AbstractWaterTank;
 
 public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
     MaterialNode _material;
+    Diameter _diameter;
     
-    public MaterialWaterTankEnd(Direction direction, MaterialNode material) {
+    public MaterialWaterTankEnd(Direction direction, MaterialNode material, Diameter diameter) {
         super(direction);
         _material = material;
+        _diameter = diameter;
     }
     
     @Override
@@ -20,7 +23,8 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
             AbstractWaterTankEnd neighbourEnd = neighbourAbstractWaterTank.getEnd(getDirection().turnAround());
             if (neighbourEnd instanceof MaterialWaterTankEnd) {
                 MaterialNode neighbourMaterial = ((MaterialWaterTankEnd) neighbourEnd).getMaterial();
-                if (_material.isCompatible(neighbourMaterial)) {
+                Diameter neighbourDiameter = ((MaterialWaterTankEnd) neighbourEnd).getDiameter();
+                if (_material.isCompatible(neighbourMaterial) && _diameter.isCompatible(neighbourDiameter)){
                     return neighbourAbstractWaterTank;
                 }
             }
@@ -35,7 +39,7 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
 
     @Override
     public boolean setParentWaterTank(AbstractWaterTank parentAbstractWaterTank) {
-        if (parentAbstractWaterTank.getMaterial().isCompatible(_material)) {
+        if (parentAbstractWaterTank.getMaterial().isCompatible(_material) && parentAbstractWaterTank.getDiameter().isCompatible(_diameter)) {
             _parentAbstractWaterTank = parentAbstractWaterTank;
             return true;
         }
@@ -44,11 +48,19 @@ public class MaterialWaterTankEnd extends AbstractWaterTankEnd {
 
     @Override
     public String toString() {
-        String toString = super.toString();
-        return toString + ": " +_material.toString();
+        String superToString = super.toString();
+        return superToString + ": " +_material.toString() + "; diameter: " + _diameter.toString();
     }
 
     public void setMaterial(MaterialNode material) {
         _material = material;
+    }
+
+    public void setDiameter(Diameter diameter) {
+        _diameter = diameter;
+    }
+
+    public Diameter getDiameter() {
+        return _diameter;
     }
 }

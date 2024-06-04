@@ -1,6 +1,7 @@
 package classes.entities.water_tanks;
 
 import classes.Cell;
+import classes.Diameter;
 import classes.Direction;
 import classes.MaterialNode;
 import classes.MaterialNode.MaterialType;
@@ -19,9 +20,18 @@ public class AbstractWaterTank extends Entity {
     private Water _water;
     protected ArrayList<WaterTankActionListener> _listeners = new ArrayList<WaterTankActionListener>();
     protected MaterialNode _material;
+    private Diameter _diameter;
     
     public AbstractWaterTank() {
         super();
+    }
+
+    public Diameter getDiameter() {
+        return _diameter;
+    }
+
+    public void setDiameter(Diameter diameter) {
+        _diameter = diameter;
     }
 
     public boolean addEnd(AbstractWaterTankEnd end) {
@@ -187,26 +197,27 @@ public class AbstractWaterTank extends Entity {
     }
 
     public void configureTankWithOneMaterial(String config, MaterialNode materialRoot) {
-        // <<Материал трубы>>; <<Верхний выход (1 или 0)>>; <<Правый выход (1 или 0)>>; <<Нижний выход (1 или 0)>>; <<Левый выход (1 или 0)>>
+        // <<Материал трубы>>; <<Диаметр>>; <<Верхний выход (1 или 0)>>; <<Правый выход (1 или 0)>>; <<Нижний выход (1 или 0)>>; <<Левый выход (1 или 0)>>
         String[] configSplit = config.split(";");
-        if (configSplit.length != 5) {
+        if (configSplit.length != 6) {
             throw new IllegalArgumentException("Invalid one material tank configuration: " + config);
         }
 
         String materialName = configSplit[0];
-        String newConfig = materialName + ";";
+        String diameter = configSplit[1];
+        String newConfig = materialName + ";" + diameter + ";";
 
-        for (int i = 1; i < 5; i++) {
-            newConfig += (configSplit[i].equals("1") ? materialName : "null") + ";";
+        for (int i = 2; i < 6; i++) {
+            newConfig += (configSplit[i].equals("1") ? materialName + ";" +  diameter: "null;0") + ";";
         }
 
         configureTankEndsToMaterial(newConfig, materialRoot);
     }
 
     public void configureTankEndsToMaterial(String config, MaterialNode materialRoot) {
-        // <<Материал танка>>; <<материал верхнего конца>>; <<материал правого конца>>; <<материал нижнего конца>>; <материал левого конца>>
+        // <<Материал танка>>; <<диметр танка>>; <<материал верхнего конца>>; <<диметр верхнего конца>>; <<материал правого конца>>; <<диаметр правого конца>>; <<материал нижнего конца>>; <<диаметр нижнего конца>>; <материал левого конца>>; <<диаметр левого конца>>
         String[] configParts = config.split(";");
-        if (configParts.length != 5) {
+        if (configParts.length != 10) {
             throw new IllegalArgumentException("Invalid tank configuration: " + config);
         }
 
@@ -216,9 +227,10 @@ public class AbstractWaterTank extends Entity {
         }
 
         setMaterial(pipeMaterial);
+        setDiameter(new Diameter(Integer.parseInt(configParts[1])));
         clearEnds();
 
-        for (int i = 1; i < 5; i++) {
+        for (int i = 2; i < configParts.length; i += 2) {
             if (configParts[i].equals("null")) {
                 continue;
             }
@@ -227,8 +239,10 @@ public class AbstractWaterTank extends Entity {
             if (material == null) {
                 throw new IllegalArgumentException("Invalid material: " + configParts[i]);
             }
-            addEnd(new MaterialWaterTankEnd(Direction.values()[i - 1], material));
+            Diameter diameter = new Diameter(Integer.parseInt(configParts[i + 1]));
+            addEnd(new MaterialWaterTankEnd(Direction.values()[(i - 2) / 2], material, diameter));
         }
+
     }
  
 }

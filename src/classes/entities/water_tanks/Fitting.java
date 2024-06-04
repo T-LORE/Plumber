@@ -14,11 +14,4 @@ public class Fitting extends AbstractRotatableWaterTanks{
     public void setMaterial(MaterialNode material) {
         return;
     }
-
-    public void setMaterialByDirection(MaterialNode material, Direction direction) {
-        if (getEnd(direction) != null) {
-            removeEnd(getEnd(direction));
-        }
-        addEnd(new MaterialWaterTankEnd(direction, material));
-    }
 }
