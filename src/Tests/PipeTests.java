@@ -328,7 +328,7 @@ public class PipeTests {
         field.getSource().createWater().flow();
         sleep(10);
 
-        Pipe pipe = field.getRotatableTankOnCords(new Point(1, 0));
+        Pipe pipe = (Pipe) field.getRotatableTankOnCords(new Point(1, 0));
         assertEquals(field.getSource().getWater(), pipe.getWater());
 
         // delete file
@@ -361,7 +361,7 @@ public class PipeTests {
         field.getSource().createWater().flow();
         sleep(10);
 
-        Pipe pipe = field.getRotatableTankOnCords(new Point(1, 0));
+        Pipe pipe = (Pipe) field.getRotatableTankOnCords(new Point(1, 0));
         assertEquals(null, pipe.getWater());
 
         // delete file

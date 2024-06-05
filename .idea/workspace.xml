@@ -5,25 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f09ae5a-fca1-4360-9de9-b9132dd4e8de" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/DiameterTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/FittingTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/MaterialEndTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/new_tests/MaterialNodeTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/123.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/123.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/AbstractWaterTankTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/DrainTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DrainTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/FieldTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/FieldTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/GameTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/GameTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests/PipeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PipeTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/PlayerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PlayerTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/WaterTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/WaterTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Diameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Diameter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MaterialNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MaterialNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Water.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Water.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/entities/water_tanks/Fitting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/entities/water_tanks/Fitting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/DrainWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/DrainWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/new_tests/FittingTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/new_tests/FittingTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/new_tests/MaterialEndTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/new_tests/MaterialEndTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_level.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +91,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "fitting",
+    "git-widget-placeholder": "base-version",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/tlore/Desktop/Учеба/3 курс/2 сем/OOP/Plumber",
     "project.structure.last.edited": "Modules",
@@ -245,32 +231,6 @@
       <updated>1712143648495</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/FieldTests.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/WaterTests.java</url>
-          <line>237</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ui/FieldWidget.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/new_tests/MaterialNodeTests.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Plumber$TestAll.ic" NAME="TestAll Coverage Results" MODIFIED="1713126832420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -31,7 +31,7 @@ public class MaterialEndTests {
                 "□□d\n" +
                 "METAL;10;0;0;1;0\n" +
                 "METAL;10;0;0;0;1\n" +
-                "UNIVERSAL;0;METAL;10;null;10;null;10;null;10\n";
+                "METAL;10;null;10;null;10;null;10\n";
 
         _field = prepareField(level);
 
@@ -51,7 +51,7 @@ public class MaterialEndTests {
                 "□□d\n" +
                 "METAL;10;0;0;1;0\n" +
                 "METAL;10;0;0;0;1\n" +
-                "UNIVERSAL;0;STEEL;10;null;10;null;10;null;10\n";
+                "STEEL;10;null;10;null;10;null;10\n";
 
         _field = prepareField(level);
 
@@ -71,7 +71,7 @@ public class MaterialEndTests {
                 "□□d\n" +
                 "METAL;10;0;0;1;0\n" +
                 "METAL;10;0;0;0;1\n" +
-                "UNIVERSAL;0;PLASTIC;10;null;10;null;10;null;10\n";
+                "PLASTIC;10;null;10;null;10;null;10\n";
 
         _field = prepareField(level);
 
@@ -91,7 +91,7 @@ public class MaterialEndTests {
                 "□□d\n" +
                 "UNIVERSAL;10;0;0;1;0\n" +
                 "UNIVERSAL;10;0;0;0;1\n" +
-                "UNIVERSAL;0;UNIVERSAL;10;null;10;null;10;null;10\n";
+                "UNIVERSAL;10;null;10;null;10;null;10\n";
 
         _field = prepareField(level);
 
@@ -111,7 +111,7 @@ public class MaterialEndTests {
                 "□□d\n" +
                 "UNIVERSAL;10;0;0;1;0\n" +
                 "UNIVERSAL;10;0;0;0;1\n" +
-                "UNIVERSAL;0;UNIVERSAL;20;null;10;null;10;null;10\n";
+                "UNIVERSAL;20;null;10;null;10;null;10\n";
 
         _field = prepareField(level);
 
@@ -131,7 +131,7 @@ public class MaterialEndTests {
                 "□□d\n" +
                 "UNIVERSAL;10;0;0;1;0\n" +
                 "UNIVERSAL;10;0;0;0;1\n" +
-                "UNIVERSAL;0;UNIVERSAL;0;null;10;null;10;null;10\n";
+                "UNIVERSAL;0;null;10;null;10;null;10\n";
 
         _field = prepareField(level);
 
