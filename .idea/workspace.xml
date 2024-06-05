@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f09ae5a-fca1-4360-9de9-b9132dd4e8de" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/PipeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PipeTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/new_tests/FittingTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/new_tests/FittingTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/new_tests/MaterialEndTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/new_tests/MaterialEndTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plumber.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,13 +89,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "base-version",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tlore/Desktop/Учеба/3 курс/2 сем/OOP/Plumber",
+    "last_opened_file_path": "C:/Users/tlore/Desktop/sd",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.TestAll">
+  <component name="RunManager" selected="Application.Run">
     <configuration name="Run" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Plumber" />

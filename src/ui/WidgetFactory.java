@@ -76,4 +76,8 @@ public class WidgetFactory {
         return new TexturedButton("button_load.png", 250, 80);
     }
 
+    public TexturedButton createHelpButton() {
+        return new TexturedButton("help_button.png", 250, 80);
+    }
+
 }
