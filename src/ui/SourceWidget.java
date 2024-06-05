@@ -23,8 +23,7 @@ public class SourceWidget  extends AbstractWaterTankWidget {
 
     @Override
     protected BufferedImage getTankTextureBase() {
-        String material = getWaterTank().getMaterial().toString().toLowerCase();
-        String filepath = path + material + "/" + "base.png";
+        String filepath = path + "base_filled.png";
         return ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
     }
 
@@ -32,7 +31,8 @@ public class SourceWidget  extends AbstractWaterTankWidget {
     protected BufferedImage getTankTextureEnd(Direction direction) {
         String material = ((MaterialWaterTankEnd)getWaterTank().getEnd(direction)).getMaterial().toString().toLowerCase();
         String diameter = getWaterTank().getDiameter().toString().toLowerCase();
-        String filepath = path + material + "/" + "end_" + diameter + ".png";
+
+        String filepath = "water_tanks/pipe/" + material + "/" + "end_" + diameter + ".png";
         BufferedImage img = ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
         return shiftEndPicture(img, direction);
     }

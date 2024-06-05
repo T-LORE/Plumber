@@ -86,8 +86,5 @@ public class Water {
         for (WaterActionListener listener : _listeners) {
             listener.waterEndFlow(new WaterActionEvent(this));
         }
-    }
-
-
-    
+    } 
 }

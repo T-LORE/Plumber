@@ -8,7 +8,6 @@ import classes.MaterialNode.MaterialType;
 import classes.entities.water_tanks.AbstractWaterTank;
 import classes.entities.water_tanks.Fitting;
 import classes.entities.water_tanks.Pipe;
-import classes.entities.water_tanks.Source;
 import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
 import classes.entities.water_tanks.water_tanks_ends.MaterialWaterTankEnd;
 
@@ -19,7 +18,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -165,9 +163,9 @@ public class FittingTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
         
-        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        AbstractWaterTank start = field.getRotatableTankOnCords(new Point(1, 1));
         HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
-        expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
+        expectedConnected.put(Direction.UP, field.getRotatableTankOnCords(new Point(1, 0)));
 
         HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
@@ -206,10 +204,10 @@ public class FittingTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        AbstractWaterTank start = field.getRotatableTankOnCords(new Point(1, 1));
         HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
-        expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
-        expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(1, 2)));
+        expectedConnected.put(Direction.UP, field.getRotatableTankOnCords(new Point(1, 0)));
+        expectedConnected.put(Direction.DOWN, field.getRotatableTankOnCords(new Point(1, 2)));
 
         HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
@@ -249,11 +247,11 @@ public class FittingTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        AbstractWaterTank start = field.getRotatableTankOnCords(new Point(1, 1));
         HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
-        expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
-        expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(1, 2)));
-        expectedConnected.put(Direction.RIGHT, field.getPipeOnCords(new Point(2, 1)));
+        expectedConnected.put(Direction.UP, field.getRotatableTankOnCords(new Point(1, 0)));
+        expectedConnected.put(Direction.DOWN, field.getRotatableTankOnCords(new Point(1, 2)));
+        expectedConnected.put(Direction.RIGHT, field.getRotatableTankOnCords(new Point(2, 1)));
 
         HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
@@ -294,12 +292,12 @@ public class FittingTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        AbstractWaterTank start = field.getPipeOnCords(new Point(1, 1));
+        AbstractWaterTank start = field.getRotatableTankOnCords(new Point(1, 1));
         HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
-        expectedConnected.put(Direction.UP, field.getPipeOnCords(new Point(1, 0)));
-        expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(1, 2)));
-        expectedConnected.put(Direction.RIGHT, field.getPipeOnCords(new Point(2, 1)));
-        expectedConnected.put(Direction.LEFT, field.getPipeOnCords(new Point(0, 1)));
+        expectedConnected.put(Direction.UP, field.getRotatableTankOnCords(new Point(1, 0)));
+        expectedConnected.put(Direction.DOWN, field.getRotatableTankOnCords(new Point(1, 2)));
+        expectedConnected.put(Direction.RIGHT, field.getRotatableTankOnCords(new Point(2, 1)));
+        expectedConnected.put(Direction.LEFT, field.getRotatableTankOnCords(new Point(0, 1)));
 
         HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
@@ -337,9 +335,9 @@ public class FittingTests {
         // load from file
         Field field = Field.loadFromFile(fileName);
 
-        AbstractWaterTank start = field.getPipeOnCords(new Point(2, 0));
+        AbstractWaterTank start = field.getRotatableTankOnCords(new Point(2, 0));
         HashMap<Direction, AbstractWaterTank> expectedConnected = new HashMap<>();
-        expectedConnected.put(Direction.DOWN, field.getPipeOnCords(new Point(2, 1)));
+        expectedConnected.put(Direction.DOWN, field.getRotatableTankOnCords(new Point(2, 1)));
 
         HashMap<Direction, AbstractWaterTank> actualConnected = start.getConnectedWaterTanks();
         assertEquals(expectedConnected.size(), actualConnected.size());
@@ -380,7 +378,7 @@ public class FittingTests {
         field.getSource().createWater().flow();
         sleep(10);
 
-        Pipe pipe = field.getPipeOnCords(new Point(1, 0));
+        Pipe pipe = field.getRotatableTankOnCords(new Point(1, 0));
         assertEquals(field.getSource().getWater(), pipe.getWater());
 
         // delete file
@@ -413,7 +411,7 @@ public class FittingTests {
         field.getSource().createWater().flow();
         sleep(10);
 
-        Pipe pipe = field.getPipeOnCords(new Point(1, 0));
+        Pipe pipe = field.getRotatableTankOnCords(new Point(1, 0));
         assertEquals(null, pipe.getWater());
 
         // delete file

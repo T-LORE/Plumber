@@ -10,29 +10,27 @@ import classes.entities.water_tanks.water_tanks_ends.MaterialWaterTankEnd;
 
 public class FittingWidget extends AbstractRotatableWaterTankWidget {
 
-    private static final int END_SHIFT_OFFSET = CellWidget.getCellSize() / 64 * 21;
+    private static final int END_SHIFT_OFFSET = 42;
 
     public FittingWidget(Fitting fitting) {
         super(fitting);
     }
 
-    private static final String path = "water_tanks/pipe/";
+    private static final String path = "water_tanks/";
 
     @Override
     protected BufferedImage getTankTextureBase() {
         String filled = getRotatableWaterTank().getWater() != null ? "filled" : "empty";
-        String filepath = path + "universal/" + "base_" + filled + ".png";
+        String filepath = path + "fiting/" + "base_" + filled + ".png";
         return ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
     }
 
     @Override
     protected BufferedImage getTankTextureEnd(Direction direction) {
-        String filled = getRotatableWaterTank().getWater() != null ? "filled" : "empty";
-        //TODO: неправильно блять
         String material = ((MaterialWaterTankEnd)getWaterTank().getEnd(direction)).getMaterial().toString().toLowerCase();
-        String diameter = getWaterTank().getDiameter().toString().toLowerCase();
-        String filepath = path + material + "/" + "end_" + diameter + "_" + filled + ".png";
-        System.out.println(filepath);
+        String diameter = ((MaterialWaterTankEnd)getWaterTank().getEnd(direction)).getDiameter().toString().toLowerCase();
+        AbstractWaterTank wt = getWaterTank();
+        String filepath = path + "pipe/" + material + "/" + "end_" + diameter + ".png";
         BufferedImage img = ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
         return shiftEndPicture(img, direction);
     }

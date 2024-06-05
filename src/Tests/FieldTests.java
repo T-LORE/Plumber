@@ -2,11 +2,8 @@ package Tests;
 import classes.Cell;
 import classes.Direction;
 import classes.Field;
-import classes.entities.water_tanks.Source;
+import classes.entities.water_tanks.*;
 import classes.entities.water_tanks.water_tanks_ends.AbstractWaterTankEnd;
-import classes.entities.water_tanks.AbstractWaterTank;
-import classes.entities.water_tanks.Drain;
-import classes.entities.water_tanks.Pipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
@@ -267,7 +264,7 @@ public class FieldTests {
         assertNotNull(source);
         assertEquals(new Point(1, 4), source.getCell().getCoords());
 
-        Pipe pipe = field.getPipeOnCords(new Point(1, 2));
+        AbstractRotatableWaterTanks pipe = field.getRotatableTankOnCords(new Point(1, 2));
         assertNotNull(pipe);
         ArrayList<Direction> pipeExpectedDirections = new ArrayList<>();
         pipeExpectedDirections.add(Direction.UP);
@@ -277,7 +274,7 @@ public class FieldTests {
            assertTrue(pipeExpectedDirections.contains(direction));
         }
 
-        pipe = field.getPipeOnCords(new Point(1, 1));
+        pipe = field.getRotatableTankOnCords(new Point(1, 1));
         assertNotNull(pipe);
         pipeExpectedDirections = new ArrayList<>();
         pipeExpectedDirections.add(Direction.RIGHT);
@@ -287,7 +284,7 @@ public class FieldTests {
         }
 
         
-        pipe = field.getPipeOnCords(new Point(1, 2));
+        pipe = field.getRotatableTankOnCords(new Point(1, 2));
         assertNotNull(pipe);
         pipeExpectedDirections = new ArrayList<>();
         pipeExpectedDirections.add(Direction.UP);
@@ -296,7 +293,7 @@ public class FieldTests {
            assertTrue(pipeExpectedDirections.contains(direction));
         }
 
-        pipe = field.getPipeOnCords(new Point(1, 3));
+        pipe = field.getRotatableTankOnCords(new Point(1, 3));
         assertNotNull(pipe);
         pipeExpectedDirections = new ArrayList<>();
         pipeExpectedDirections.add(Direction.UP);
@@ -441,7 +438,7 @@ public class FieldTests {
 
     @Test
     void getPipeOnEmptyField() {
-        assertNull(_field.getPipeOnCords(new Point(1, 1)));
+        assertNull(_field.getRotatableTankOnCords(new Point(1, 1)));
     }
 
     @Test
@@ -450,7 +447,7 @@ public class FieldTests {
         Pipe pipe = new Pipe();
         cell.setEntity(pipe);
         _field.setCell(cell);
-        assertEquals(pipe, _field.getPipeOnCords(new Point(1, 1)));
+        assertEquals(pipe, _field.getRotatableTankOnCords(new Point(1, 1)));
     }
 
     @Test

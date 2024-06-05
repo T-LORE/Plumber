@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class PipeWidget extends AbstractRotatableWaterTankWidget {
 
-    private static final int END_SHIFT_OFFSET = 20;
+    private static final int END_SHIFT_OFFSET = 42;
 
     public PipeWidget(Pipe pipe) {
         super(pipe);
@@ -29,20 +29,18 @@ public class PipeWidget extends AbstractRotatableWaterTankWidget {
 
     @Override
     protected BufferedImage getTankTextureBase() {
-        String material = getWaterTank().getMaterial().toString().toLowerCase();
         String filled = getRotatableWaterTank().getWater() != null ? "filled" : "empty";
-        String filepath = path + material + "/" + "base_" + filled + ".png";
-        return ImageLoader.loadImage(filepath, 64, 64);
+        String filepath = path + "base_" + filled + ".png";
+        return ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
     }
 
     @Override
     protected BufferedImage getTankTextureEnd(Direction direction) {
-        String filled = getRotatableWaterTank().getWater() != null ? "filled" : "empty";
         String material = ((MaterialWaterTankEnd)getWaterTank().getEnd(direction)).getMaterial().toString().toLowerCase();
-        String diameter = getWaterTank().getDiameter().toString().toLowerCase();
-        String filepath = path + material + "/" + "end_" + diameter + "_" + filled + ".png";
+        String diameter = ((MaterialWaterTankEnd)getWaterTank().getEnd(direction)).getDiameter().toString().toLowerCase();
+        String filepath = path + material + "/" + "end_" + diameter + ".png";
         System.out.println(filepath);
-        BufferedImage img = ImageLoader.loadImage(filepath, 64, 64);
+        BufferedImage img = ImageLoader.loadImage(filepath, CellWidget.getCellSize(), CellWidget.getCellSize());
         return shiftEndPicture(img, direction);
     }
     

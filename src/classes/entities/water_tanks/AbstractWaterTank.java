@@ -207,6 +207,11 @@ public class AbstractWaterTank extends Entity {
         String diameter = configSplit[1];
         String newConfig = materialName + ";" + diameter + ";";
 
+        if (diameter == "0")
+        {
+            System.out.println("Invalid diameter: " + diameter);
+        }
+
         for (int i = 2; i < 6; i++) {
             newConfig += (configSplit[i].equals("1") ? materialName + ";" +  diameter: "null;0") + ";";
         }
@@ -241,7 +246,7 @@ public class AbstractWaterTank extends Entity {
             }
             Diameter diameter = new Diameter(Integer.parseInt(configParts[i + 1]));
             addEnd(new MaterialWaterTankEnd(Direction.values()[(i - 2) / 2], material, diameter));
-        }
+        } 
 
     }
  

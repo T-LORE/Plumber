@@ -1,5 +1,6 @@
 package classes;
 
+import classes.entities.water_tanks.AbstractRotatableWaterTanks;
 import classes.entities.water_tanks.Pipe;
 import classes.events.*;
 
@@ -51,9 +52,9 @@ public class Game {
 
     private void rotateClockwise(Point cords){
         if (_gameStatus == GameStatus.CONSTRUCTION_PHASE) {
-            Pipe pipe = _field.getPipeOnCords(cords);
-            if (pipe != null) {
-                pipe.rotateClockwise();
+            AbstractRotatableWaterTanks rotatableTank = _field.getRotatableTankOnCords(cords);
+            if (rotatableTank != null) {
+                rotatableTank.rotateClockwise();
             }
         }
     }
@@ -156,5 +157,4 @@ public class Game {
             }
         }
     }
-
 }

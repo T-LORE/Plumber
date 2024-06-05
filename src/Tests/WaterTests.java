@@ -104,9 +104,9 @@ public class WaterTests {
         water.flow();
         sleep(10);
         assertEquals(water, _field.getDrain().getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(0, 1)).getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(0, 2)).getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(1, 2)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(0, 1)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(0, 2)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(1, 2)).getWater());
     }
 
     @Test
@@ -130,11 +130,11 @@ public class WaterTests {
         water.flow();
         sleep(10);
         assertEquals(water, _field.getDrain().getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(0, 1)).getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(0, 2)).getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(1, 1)).getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(1, 2)).getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(2, 1)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(0, 1)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(0, 2)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(1, 1)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(1, 2)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(2, 1)).getWater());
     }
 
     @Test
@@ -156,9 +156,9 @@ public class WaterTests {
         water.flow();
         sleep(10);
         assertEquals(null, _field.getDrain().getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(0, 1)).getWater());
-        assertEquals(null, _field.getPipeOnCords(new Point(2, 1)).getWater());
-        assertEquals(null, _field.getPipeOnCords(new Point(1, 2)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(0, 1)).getWater());
+        assertEquals(null, _field.getRotatableTankOnCords(new Point(2, 1)).getWater());
+        assertEquals(null, _field.getRotatableTankOnCords(new Point(1, 2)).getWater());
     }
 
     @Test
@@ -180,9 +180,9 @@ public class WaterTests {
         water.flow();
         sleep(10);
         assertEquals(null, _field.getDrain().getWater());
-        assertEquals(water, _field.getPipeOnCords(new Point(0, 1)).getWater());
-        assertEquals(null, _field.getPipeOnCords(new Point(2, 1)).getWater());
-        assertEquals(null, _field.getPipeOnCords(new Point(1, 2)).getWater());
+        assertEquals(water, _field.getRotatableTankOnCords(new Point(0, 1)).getWater());
+        assertEquals(null, _field.getRotatableTankOnCords(new Point(2, 1)).getWater());
+        assertEquals(null, _field.getRotatableTankOnCords(new Point(1, 2)).getWater());
     }
 
     @Test

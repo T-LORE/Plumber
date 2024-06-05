@@ -131,7 +131,7 @@ public class GameTests {
         ArrayList<Direction> expectedDirs = new ArrayList<Direction>();
         expectedDirs.add(Direction.LEFT);
         expectedDirs.add(Direction.RIGHT);
-        ArrayList <AbstractWaterTankEnd> ends = _game.getField().getPipeOnCords( new Point(0,1)).getEnds();
+        ArrayList <AbstractWaterTankEnd> ends = _game.getField().getRotatableTankOnCords( new Point(0,1)).getEnds();
         for (AbstractWaterTankEnd end : ends) {
             assertEquals(true, expectedDirs.contains(end.getDirection()));
         }

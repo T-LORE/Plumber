@@ -1,10 +1,7 @@
 package classes;
 
 import classes.entities.Entity;
-import classes.entities.water_tanks.Drain;
-import classes.entities.water_tanks.Fitting;
-import classes.entities.water_tanks.Pipe;
-import classes.entities.water_tanks.Source;
+import classes.entities.water_tanks.*;
 
 import java.awt.*;
 import java.io.*;
@@ -71,10 +68,10 @@ public class Field {
         return _drain;
     }
 
-    public Pipe getPipeOnCords(Point cords) {
+    public AbstractRotatableWaterTanks getRotatableTankOnCords(Point cords) {
         Entity entity = getCell(cords).getEntity();
-        if (entity instanceof Pipe) {
-            return (Pipe) entity;
+        if (entity instanceof AbstractRotatableWaterTanks) {
+            return (AbstractRotatableWaterTanks) entity;
         } else {
             return null;
         }
@@ -132,7 +129,7 @@ public class Field {
             pipe.configureTankWithOneMaterial(reader.readLine(), root);
         }
         for (Fitting fitting : field.getFittings()) {
-            fitting.configureTankEndsToMaterial(reader.readLine(), root);
+            fitting.configureTankEndsToMaterial("UNIVERSAL;10;"+reader.readLine(), root);
         }
         reader.close();
 

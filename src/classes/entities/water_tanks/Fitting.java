@@ -17,4 +17,9 @@ public class Fitting extends AbstractRotatableWaterTanks{
         return;
     }
 
+    @Override
+    public void setDiameter(Diameter diameter) {
+        return;
+    }
+
 }
