@@ -92,7 +92,7 @@ public class MaterialNode {
         MaterialNode plastic = new MaterialNode(MaterialType.PLASTIC);
         MaterialNode steel = new MaterialNode(MaterialType.STEEL);
         MaterialNode carbonSteel = new MaterialNode(MaterialType.CARBON_STEEL);
-        MaterialNode stainlessSteel = new MaterialNode(MaterialType.STAINLESS_STEEL);
+        DuplicatedMaterial stainlessSteel = new DuplicatedMaterial(MaterialType.STAINLESS_STEEL);
         MaterialNode alloySteel = new MaterialNode(MaterialType.ALLOY_STEEL);
 
         _root.addChild(metal);
@@ -100,8 +100,9 @@ public class MaterialNode {
 
         metal.addChild(steel);
         steel.addChild(carbonSteel);
-        carbonSteel.addChild(stainlessSteel);
+        stainlessSteel.addParent(carbonSteel);
         steel.addChild(alloySteel);
+        stainlessSteel.addParent(plastic);
 
         return _root;
     }
